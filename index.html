@@ -5,41 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Designing</title>
     <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
             background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
         }
+
+        /* Container Styling */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             background: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
+
+        /* Heading Styling */
         h1 {
             text-align: center;
-            color: #333;
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 20px;
         }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* City Name Styling */
         .city-name {
             text-align: center;
             margin: 20px 0;
             font-size: 1.2rem;
             font-weight: bold;
+            color: #555;
         }
+
+        /* List Styling */
         ul {
             margin-top: 20px;
             padding-left: 20px;
+            list-style-type: square;
         }
+
         ul li {
             margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #444;
         }
+
+        /* Team Member Section Styling */
         .team-info {
             margin-top: 30px;
-            padding: 10px;
+            padding: 15px;
             background: #f0f0f0;
             border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+
+        .team-member {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .team-member strong {
+            color: #007bff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            ul li {
+                font-size: 0.9rem;
+            }
+
+            .team-member {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -50,16 +118,18 @@
 
         <h2>Key Points:</h2>
         <ul>
-            <li><strong>[Point 1]</strong>[Point 1]</li>
-            <li><strong>[Point 2]</strong>[Point 2]</li>
-            <li><strong>[Point 3]</strong>[Point 3]</li>
-            <li><strong>[Point 4]</strong>[Point 4]</li>
-            <li><strong>[Point 5]</strong>[Point 5]</li>
-            <li><strong>[Point 6]</strong>[Point 6]</li>
-            <li><strong>[Point 7]</strong>[Point 7]</li>
+            <li><strong>[Point 1]</strong> Urban planning to support sustainable growth</li>
+            <li><strong>[Point 2]</strong> Improved infrastructure for public transportation</li>
+            <li><strong>[Point 3]</strong> Enhanced green spaces and parks</li>
+            <li><strong>[Point 4]</strong> Water management and conservation strategies</li>
+            <li><strong>[Point 5]</strong> Smart city technologies for governance</li>
+            <li><strong>[Point 6]</strong> Promotion of local art and culture</li>
+            <li><strong>[Point 7]</strong> Disaster preparedness and risk mitigation</li>
         </ul>
 
-        <div class="team-member">
+        <div class="team-info">
+            <h3>Team Information</h3>
+            <div class="team-member">
                 <strong>Member 1:</strong> Name: Mohit Yadav, Roll No: 40
             </div>
             <div class="team-member">
@@ -69,8 +139,9 @@
                 <strong>Member 3:</strong> Name: Snehil Mishra, Roll No: 56
             </div>
             <div class="team-member">
-                <strong>Member 4:</strong> Name: Pratham, Roll No: [Roll 4]
+                <strong>Member 4:</strong> Name: Pratham, Roll No: 67
             </div>
+        </div>
     </div>
 </body>
 </html>
