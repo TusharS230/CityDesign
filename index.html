@@ -14,8 +14,8 @@
 
         /* Body Styling */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #eaf4fc, #f9fafe);
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -23,162 +23,99 @@
 
         /* Container Styling */
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 20px auto;
             background: #ffffff;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
-        /* Header Section */
+        /* Header Styling */
         .header {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
             text-align: center;
-            padding: 30px 15px;
+            margin-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 2.8rem;
-            font-weight: bold;
-            letter-spacing: 1.5px;
+            font-size: 2rem;
+            color: #007bff;
         }
 
-        /* City Name Section */
-        .city-name {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
+        .header .city-name {
+            font-size: 1.2rem;
             color: #555;
-            margin: 20px 0;
-            padding: 10px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            background: #f9f9f9;
+            margin-top: 10px;
         }
 
-        /* Image Styling */
-        img {
-            display: block;
-            margin: 20px auto;
-            border-radius: 12px;
-            border: 3px solid #007bff;
+        /* Image Section */
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
             max-width: 100%;
             height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        img:hover {
-            transform: scale(1.05);
+            border-radius: 5px;
         }
 
         /* Section Styling */
         section {
-            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        h2 {
-            font-size: 2rem;
+        section h2 {
+            font-size: 1.5rem;
             color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
             margin-bottom: 15px;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 1px;
         }
 
-        /* List Styling */
-        ul {
-            padding-left: 25px;
-            list-style: disc;
+        section ul {
+            list-style-type: circle;
+            margin-left: 20px;
         }
 
-        ul li {
-            margin: 10px 0;
-            font-size: 1.1rem;
-            line-height: 1.8;
+        section ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
             color: #444;
         }
 
-        /* Team Info Styling */
+        /* Team Info Section */
         .team-info {
-            margin-top: 30px;
-            padding: 25px;
-            background: #f1faff;
-            border-left: 5px solid #007bff;
-            border-radius: 8px;
+            background-color: #f7f7f7;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
         }
 
         .team-member {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-size: 1rem;
             color: #333;
         }
 
-        .team-member strong {
-            color: #007bff;
-        }
-
         .team-member a {
-            color: #0056b3;
+            color: #007bff;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
         }
 
         .team-member a:hover {
-            color: #003d99;
+            text-decoration: underline;
         }
 
         /* Footer Styling */
         .footer {
             text-align: center;
-            padding: 15px 0;
-            background: #f1f1f1;
-            color: #666;
-            font-size: 0.9rem;
             margin-top: 20px;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: #555;
             border-top: 1px solid #ddd;
-        }
-
-        /* Button Styling */
-        .btn {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-transform: uppercase;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            margin: 15px auto;
-            text-decoration: none;
-            text-align: center;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .btn:hover {
-            background: #0056b3;
-            transform: translateY(-2px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.6rem;
-            }
-
-            ul li {
-                font-size: 1rem;
-            }
-
-            .team-member {
-                font-size: 1rem;
-            }
         }
     </style>
 </head>
@@ -187,42 +124,44 @@
         <!-- Header Section -->
         <div class="header">
             <h1>City Designing</h1>
+            <div class="city-name">City Name: Palghar, Maharashtra</div>
         </div>
 
-        <!-- City Name -->
-        <div class="city-name">City Name: <span>Palghar, Maharashtra</span></div>
-
         <!-- Image Section -->
-        <img src="https://raw.githubusercontent.com/TusharS230/asstes/main/WhatsApp%20Image%202024-11-25%20at%2020.56.09_e14af9a2.jpg" alt="City View" width="400">
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/TusharS230/asstes/main/WhatsApp%20Image%202024-11-25%20at%2020.56.09_e14af9a2.jpg" alt="City View">
+        </div>
 
         <!-- Key Points Section -->
         <section>
             <h2>Key Points</h2>
             <ul>
-                <li><strong>Point 1:</strong> Urban planning to support sustainable growth</li>
-                <li><strong>Point 2:</strong> Improved infrastructure for public transportation</li>
-                <li><strong>Point 3:</strong> Enhanced green spaces and parks</li>
-                <li><strong>Point 4:</strong> Water management and conservation strategies</li>
-                <li><strong>Point 5:</strong> Smart city technologies for governance</li>
-                <li><strong>Point 6:</strong> Promotion of local art and culture</li>
-                <li><strong>Point 7:</strong> Disaster preparedness and risk mitigation</li>
+                <li>Urban planning to support sustainable growth</li>
+                <li>Improved infrastructure for public transportation</li>
+                <li>Enhanced green spaces and parks</li>
+                <li>Water management and conservation strategies</li>
+                <li>Smart city technologies for governance</li>
+                <li>Promotion of local art and culture</li>
+                <li>Disaster preparedness and risk mitigation</li>
             </ul>
         </section>
 
         <!-- Team Information Section -->
-        <section class="team-info">
+        <section>
             <h2>Team Information</h2>
-            <div class="team-member">
-                <strong>Member 1:</strong> <a href="mohit.html">Mohit Yadav</a>, Roll No: 40
-            </div>
-            <div class="team-member">
-                <strong>Member 2:</strong> <a href="tushar.html">Tushar Singh</a>, Roll No: 46
-            </div>
-            <div class="team-member">
-                <strong>Member 3:</strong> <a href="snehil.html">Snehil Mishra</a>, Roll No: 56
-            </div>
-            <div class="team-member">
-                <strong>Member 4:</strong> <a href="pratham.html">Pratham</a>, Roll No: 67
+            <div class="team-info">
+                <div class="team-member">
+                    <strong>Member 1:</strong> <a href="mohit.html">Mohit Yadav</a>, Roll No: 40
+                </div>
+                <div class="team-member">
+                    <strong>Member 2:</strong> <a href="tushar.html">Tushar Singh</a>, Roll No: 46
+                </div>
+                <div class="team-member">
+                    <strong>Member 3:</strong> <a href="snehil.html">Snehil Mishra</a>, Roll No: 56
+                </div>
+                <div class="team-member">
+                    <strong>Member 4:</strong> <a href="pratham.html">Pratham</a>, Roll No: 67
+                </div>
             </div>
         </section>
 
