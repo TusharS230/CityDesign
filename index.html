@@ -14,56 +14,72 @@
 
         /* Body Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f7;
             color: #333;
+            line-height: 1.6;
             padding: 20px;
         }
 
         /* Container Styling */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
-        /* Heading Styling */
-        h1 {
+        /* Header Styling */
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
             text-align: center;
-            font-size: 2rem;
-            color: #007bff;
-            margin-bottom: 20px;
+            padding: 20px 10px;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-top: 20px;
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         /* City Name Styling */
         .city-name {
             text-align: center;
-            margin: 20px 0;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #555;
+            margin: 20px 0;
         }
 
-        /* Centering the Image */
+        /* Image Styling */
         img {
             display: block;
-            margin: 0 auto;
+            margin: 20px auto;
+            border-radius: 8px;
+            border: 2px solid #007bff;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
         /* List Styling */
         ul {
-            margin-top: 20px;
-            padding-left: 20px;
-            list-style-type: square;
+            padding-left: 25px;
+            list-style: disc;
         }
 
         ul li {
@@ -73,19 +89,18 @@
             color: #444;
         }
 
-        /* Team Member Section Styling */
+        /* Team Info Styling */
         .team-info {
             margin-top: 30px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-left: 4px solid #007bff;
-            border-radius: 4px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
         }
 
         .team-member {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 1rem;
-            line-height: 1.4;
             color: #333;
         }
 
@@ -94,26 +109,32 @@
         }
 
         .team-member a {
-            color: #007bff;
+            color: #0056b3;
             text-decoration: none;
+            font-weight: bold;
         }
 
         .team-member a:hover {
             text-decoration: underline;
         }
 
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #f1f1f1;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
+            .header h1 {
+                font-size: 2rem;
             }
 
             h2 {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
 
             ul li {
@@ -128,23 +149,34 @@
 </head>
 <body>
     <div class="container">
-        <h1>CITY DESIGNING</h1>
+        <!-- Header Section -->
+        <div class="header">
+            <h1>City Designing</h1>
+        </div>
+
+        <!-- City Name -->
         <div class="city-name">City Name: <span>Palghar, Maharashtra</span></div>
-        <img src="https://raw.githubusercontent.com/TusharS230/asstes/main/WhatsApp%20Image%202024-11-25%20at%2020.56.09_e14af9a2.jpg" alt="Profile Picture" width="350">
 
-        <h2>Key Points:</h2>
-        <ul>
-            <li><strong>Point 1</strong> Urban planning to support sustainable growth</li>
-            <li><strong>Point 2</strong> Improved infrastructure for public transportation</li>
-            <li><strong>Point 3</strong> Enhanced green spaces and parks</li>
-            <li><strong>Point 4</strong> Water management and conservation strategies</li>
-            <li><strong>Point 5</strong> Smart city technologies for governance</li>
-            <li><strong>Point 6</strong> Promotion of local art and culture</li>
-            <li><strong>Point 7</strong> Disaster preparedness and risk mitigation</li>
-        </ul>
+        <!-- Image Section -->
+        <img src="https://raw.githubusercontent.com/TusharS230/asstes/main/WhatsApp%20Image%202024-11-25%20at%2020.56.09_e14af9a2.jpg" alt="City View" width="400">
 
-        <div class="team-info">
-            <h3>Team Information</h3>
+        <!-- Key Points Section -->
+        <section>
+            <h2>Key Points</h2>
+            <ul>
+                <li><strong>Point 1:</strong> Urban planning to support sustainable growth</li>
+                <li><strong>Point 2:</strong> Improved infrastructure for public transportation</li>
+                <li><strong>Point 3:</strong> Enhanced green spaces and parks</li>
+                <li><strong>Point 4:</strong> Water management and conservation strategies</li>
+                <li><strong>Point 5:</strong> Smart city technologies for governance</li>
+                <li><strong>Point 6:</strong> Promotion of local art and culture</li>
+                <li><strong>Point 7:</strong> Disaster preparedness and risk mitigation</li>
+            </ul>
+        </section>
+
+        <!-- Team Information Section -->
+        <section class="team-info">
+            <h2>Team Information</h2>
             <div class="team-member">
                 <strong>Member 1:</strong> <a href="mohit.html">Mohit Yadav</a>, Roll No: 40
             </div>
@@ -157,6 +189,11 @@
             <div class="team-member">
                 <strong>Member 4:</strong> <a href="pratham.html">Pratham</a>, Roll No: 67
             </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2024 City Design Project. All rights reserved.
         </div>
     </div>
 </body>
