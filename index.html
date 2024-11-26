@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A city design project for Palghar, Maharashtra with a focus on sustainability and smart city solutions.">
-    <meta name="author" content="Team Members">
-    <title>City Designing | Palghar</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>City Designing</title>
     <style>
         /* General Reset */
         * {
@@ -15,22 +12,12 @@
             box-sizing: border-box;
         }
 
-        /* Root Variables for Reusability */
-        :root {
-            --primary-color: #007bff;
-            --secondary-color: #f4f4f9;
-            --text-color: #333;
-            --accent-color: #555;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-
         /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
+            background-color: #f4f4f9;
+            color: #333;
             padding: 20px;
-            line-height: 1.6;
         }
 
         /* Container Styling */
@@ -39,7 +26,7 @@
             margin: 0 auto;
             padding: 20px;
             background: white;
-            box-shadow: 0 0 10px var(--shadow-color);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
 
@@ -47,20 +34,14 @@
         h1 {
             text-align: center;
             font-size: 2rem;
-            color: var(--primary-color);
+            color: #007bff;
             margin-bottom: 20px;
         }
 
         h2 {
             font-size: 1.5rem;
-            color: var(--text-color);
+            color: #333;
             margin-top: 20px;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            margin-bottom: 10px;
         }
 
         /* City Name Styling */
@@ -69,15 +50,13 @@
             margin: 20px 0;
             font-size: 1.2rem;
             font-weight: bold;
-            color: var(--accent-color);
+            color: #555;
         }
 
-        /* Image Centering */
+        /* Centering the Image */
         img {
             display: block;
-            margin: 20px auto;
-            border-radius: 8px;
-            max-width: 100%;
+            margin: 0 auto;
         }
 
         /* List Styling */
@@ -90,50 +69,36 @@
         ul li {
             margin: 10px 0;
             font-size: 1rem;
-            color: var(--text-color);
+            line-height: 1.5;
+            color: #444;
         }
 
-        /* Team Member Section */
+        /* Team Member Section Styling */
         .team-info {
             margin-top: 30px;
             padding: 15px;
-            background: var(--secondary-color);
-            border-left: 4px solid var(--primary-color);
+            background: #f0f0f0;
+            border-left: 4px solid #007bff;
             border-radius: 4px;
         }
 
         .team-member {
             margin-bottom: 10px;
             font-size: 1rem;
+            line-height: 1.4;
+            color: #333;
         }
 
         .team-member strong {
-            color: var(--primary-color);
+            color: #007bff;
         }
 
         .team-member a {
-            color: var(--primary-color);
+            color: #007bff;
             text-decoration: none;
         }
 
         .team-member a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: var(--accent-color);
-        }
-
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        footer a:hover {
             text-decoration: underline;
         }
 
@@ -162,41 +127,37 @@
     </style>
 </head>
 <body>
-    <div class="container" role="main">
+    <div class="container">
         <h1>CITY DESIGNING</h1>
         <div class="city-name">City Name: <span>Palghar, Maharashtra</span></div>
-        <img src="https://raw.githubusercontent.com/TusharS230/asstes/main/WhatsApp%20Image%202024-11-25%20at%2020.56.09_e14af9a2.jpg" alt="City Design Plan for Palghar" width="350" loading="lazy">
+        <img src="https://raw.githubusercontent.com/TusharS230/asstes/main/WhatsApp%20Image%202024-11-25%20at%2020.56.09_e14af9a2.jpg" alt="Profile Picture" width="350">
 
         <h2>Key Points:</h2>
         <ul>
-            <li><strong>Point 1:</strong> Urban planning to support sustainable growth</li>
-            <li><strong>Point 2:</strong> Improved infrastructure for public transportation</li>
-            <li><strong>Point 3:</strong> Enhanced green spaces and parks</li>
-            <li><strong>Point 4:</strong> Water management and conservation strategies</li>
-            <li><strong>Point 5:</strong> Smart city technologies for governance</li>
-            <li><strong>Point 6:</strong> Promotion of local art and culture</li>
-            <li><strong>Point 7:</strong> Disaster preparedness and risk mitigation</li>
+            <li><strong>Point 1</strong> Urban planning to support sustainable growth</li>
+            <li><strong>Point 2</strong> Improved infrastructure for public transportation</li>
+            <li><strong>Point 3</strong> Enhanced green spaces and parks</li>
+            <li><strong>Point 4</strong> Water management and conservation strategies</li>
+            <li><strong>Point 5</strong> Smart city technologies for governance</li>
+            <li><strong>Point 6</strong> Promotion of local art and culture</li>
+            <li><strong>Point 7</strong> Disaster preparedness and risk mitigation</li>
         </ul>
 
         <div class="team-info">
             <h3>Team Information</h3>
             <div class="team-member">
-                <strong>Member 1:</strong> <a href="mohit.html" target="_blank">Mohit Yadav</a>, Roll No: 40
+                <strong>Member 1:</strong> <a href="mohit.html">Mohit Yadav</a>, Roll No: 40
             </div>
             <div class="team-member">
-                <strong>Member 2:</strong> <a href="tushar.html" target="_blank">Tushar Singh</a>, Roll No: 46
+                <strong>Member 2:</strong> <a href="tushar.html">Tushar Singh</a>, Roll No: 46
             </div>
             <div class="team-member">
-                <strong>Member 3:</strong> <a href="snehil.html" target="_blank">Snehil Mishra</a>, Roll No: 56
+                <strong>Member 3:</strong> <a href="snehil.html">Snehil Mishra</a>, Roll No: 56
             </div>
             <div class="team-member">
-                <strong>Member 4:</strong> <a href="pratham.html" target="_blank">Pratham</a>, Roll No: 67
+                <strong>Member 4:</strong> <a href="pratham.html">Pratham</a>, Roll No: 67
             </div>
         </div>
     </div>
-
-    <footer>
-        &copy; 2024 City Design Project. Developed by <a href="#">Team Members</a>.
-    </footer>
 </body>
 </html>
