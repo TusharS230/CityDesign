@@ -21,6 +21,28 @@
             padding: 20px;
         }
 
+        .introduction-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.introduction-link a {
+    display: inline-block;
+    background: #28a745; /* Green background */
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.introduction-link a:hover {
+    background: #218838; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight upward movement on hover */
+}
+
         /* Container Styling */
         .container {
             max-width: 900px;
@@ -222,8 +244,8 @@
             <div class="team-member">
                 <strong>Member 4:</strong> <a href="pratham.html">Pratham P. Seth</a>, Roll No: 52
             </div>
-            <div>
-                <a href="introduction.html">Go to Introduction Page</a>
+            <div class="introduction-link">
+               <a href="introduction.html">Go to Introduction Page</a>
             </div>
         </section>
         <!-- Footer -->
