@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Learning Reflections</title>
+    <title>Nature-Inspired Algorithm Insights</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -35,7 +35,7 @@
             font-size: 1.8rem;
         }
 
-        ol {
+        ul {
             padding-left: 20px;
         }
 
@@ -74,25 +74,101 @@
 </head>
 <body>
     <div class="container">
-        <h1>Course Learning Reflections</h1>
-        <div class="questions">
-            <h2>Reflection Questions</h2>
-            <ol>
-                <li>What are the kinds of problems we see in nature? (iteration, recursion, backtracking)</li>
-                <li>What is space and time efficiency? Why are they important? Explain the different class of problems and orders of growth.</li>
-                <li>Take away from different design principles from chapter 2 (can use the notes provided).</li>
-                <li>The hierarchical data and how different tree data structures solve and optimize over the problem scenarios (tree, BST, AVL, 2-3, red-black, heap, trie).</li>
-                <li>The need of array query algorithms and their implications. Their applications and principles need to be discussed.</li>
-                <li>Differentiate between tree and graphs and their traversals. The applications of each.</li>
-                <li>Deliberate on sorting and searching algorithms, the technique behind each and how they connect to the real world.</li>
-                <li>Discuss the importance of graph algorithms with respect to spanning trees and shortest paths.</li>
-                <li>Discuss the different studied algorithm design techniques.</li>
-            </ol>
-        </div>
+        <h1>Nature-Inspired Algorithm Insights</h1>
+
+        <h2>1. Types of Problems</h2>
+        <ul>
+            <li><strong>Iteration:</strong> The step repetition using various loops (for, while). For example, adding the sum of all elements in a list.</li>
+            <li><strong>Recursion:</strong> When a function calls itself repeatedly to solve the entire problem in smaller subproblems. For example, finding 𝑛! (𝑛 factorial = 𝑛 × (𝑛 − 1)!).</li>
+            <li><strong>Backtracking:</strong> Tries out every possible option till the current one comes out correct. Example: Solving different kinds of puzzles like Sudoku or N-Queens.</li>
+        </ul>
+
+        <h2>2. Space and Time Efficiency</h2>
+        <ul>
+            <li><strong>Time Efficiency:</strong> Checks how fast an algorithm runs.</li>
+            <li><strong>Space Efficiency:</strong> Checks how much memory it uses.</li>
+            <li><strong>Why Important:</strong> Tells us about larger problems that can be solved quickly and efficiently.</li>
+            <li><strong>Growth Types:</strong> 
+                <ul>
+                    <li><strong>Fast Algorithms:</strong> Take time less than Ω(1) or O(log n).</li>
+                    <li><strong>Slow Algorithms:</strong> Take more time, such as O(n²) or O(2^n).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>3. Takeaways from Chapter 2: Design Principles</h2>
+        <ul>
+            <li><strong>Divide and Conquer:</strong> Take the approach in which we split the problem into small parts, and solve them to come together as a whole. Example: Merge Sort.</li>
+            <li><strong>Greedy:</strong> Always pick the best option there and then. Example: Shortest available path in a graph.</li>
+            <li><strong>Dynamic Programming:</strong> An approach that solves problems recursively, retaining past computed results. Example: Dijkstra's Algorithm (finding the shortest distance between two places in a city).</li>
+            <li><strong>Backtracking:</strong> Exploring all possible solutions one after another. Example: Solving a maze.</li>
+        </ul>
+
+        <h2>4. Trees and Their Usefulness</h2>
+        <ul>
+            <li><strong>Types of Trees:</strong>
+                <ul>
+                    <li><strong>Binary Trees (BT):</strong> These trees store the full data hierarchy.</li>
+                    <li><strong>Binary Search Trees (BST):</strong> This type of tree makes the search more efficient.</li>
+                    <li><strong>AVL Tree & Red-Black Tree:</strong> Self-adjusting trees that maintain balance for more efficient searches.</li>
+                    <li><strong>Heap:</strong> Helps to know the highest priority element.</li>
+                    <li><strong>Trie:</strong> Great for word searches like autocomplete.</li>
+                </ul>
+            </li>
+            <li><strong>Why Useful:</strong> Trees help organize data for quick searching, sorting, and optimizing.</li>
+        </ul>
+
+        <h2>5. Array Query Algorithms</h2>
+        <ul>
+            <li><strong>Why Needed:</strong> Quick answers to questions like: What is the sum of numbers in this range?</li>
+            <li><strong>Examples:</strong>
+                <ul>
+                    <li><strong>Prefix Sum:</strong> Computes sum efficiently by storing earlier sum calculations.</li>
+                    <li><strong>Segment Tree:</strong> Allows updates and queries in minimal time.</li>
+                </ul>
+            </li>
+            <li><strong>Applications:</strong> Used in gaming, finance, and competitive programming.</li>
+        </ul>
+
+        <h2>6. Differences Between Trees and Graphs</h2>
+        <ul>
+            <li><strong>Trees:</strong> A certain type of graph without cycles. Example: A family tree.</li>
+            <li><strong>Graphs:</strong> A network of nodes and edges, can be cyclic. Example: Social networks or city routes.</li>
+            <li><strong>Traversals:</strong> 
+                <ul>
+                    <li><strong>Trees:</strong> Preorder, In-Order, Postorder.</li>
+                    <li><strong>Graphs:</strong> Breadth-First Search (BFS), Depth-First Search (DFS).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>7. Sorting and Searching</h2>
+        <ul>
+            <li><strong>Sorting Algorithms:</strong> Organize data in a particular order, e.g., from smallest to largest. Example: Bubble sort, Quick sort.</li>
+            <li><strong>Searching Algorithms:</strong> Find a particular item in a list. Example: Linear search, Binary search (faster for sorted data).</li>
+            <li><strong>Applications:</strong> File searching, item ranking, database lookups.</li>
+        </ul>
+
+        <h2>8. Graph Algorithms</h2>
+        <ul>
+            <li><strong>Spanning Trees:</strong> Connect all nodes with minimal cost. Example: Kruskal and Prim algorithms to find Minimum Spanning Tree (MST).</li>
+            <li><strong>Shortest Paths:</strong> Find the shortest route between two points. Example: Dijkstra's, Bellman-Ford algorithms.</li>
+            <li><strong>Applications:</strong> GPS navigation, networking, and building effective systems.</li>
+        </ul>
+
+        <h2>9. Algorithm Design Techniques</h2>
+        <ul>
+            <li><strong>Divide and Conquer:</strong> Breaks the problem into parts, solves them, and combines results. Example: Merge Sort.</li>
+            <li><strong>Greedy:</strong> Selects the best option step by step. Example: Huffman coding.</li>
+            <li><strong>Dynamic Programming:</strong> Solves problems using previously computed results. Example: Knapsack problem.</li>
+            <li><strong>Backtracking:</strong> Tries every possible option until the solution is found. Example: Solving puzzles.</li>
+        </ul>
+
         <a href="index.html">Back to Main Page</a>
     </div>
+
     <div class="footer">
-        &copy; 2024 Course Learning Reflections. All rights reserved.
+        &copy; 2024 Algorithm Insights. All rights reserved.
     </div>
 </body>
 </html>
