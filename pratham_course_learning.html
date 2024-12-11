@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Cases and SDG Mapping</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #eaf4fc);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 20px;
+            font-size: 1.8rem;
+        }
+
+        .accordion {
+            background-color: #f1f1f1;
+            color: #444;
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: background-color 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .panel {
+            padding: 0 10px;
+            display: none;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        a {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mapping Business Cases to SDG Targets and Indicators</h1>
+
+        <button class="accordion">1. Commercial Complexes</button>
+        <div class="panel">
+            <p><strong>Target 11.6:</strong> By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management.</p>
+            <p><strong>Indicator 11.6.1:</strong> By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management.</p>
+        </div>
+
+        <button class="accordion">2. Petrol Pumps</button>
+        <div class="panel">
+            <p><strong>Target 11.6:</strong> By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management.</p>
+            <p><strong>Indicator 11.6.1:</strong> By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management.</p>
+        </div>
+
+        <button class="accordion">3. Banks</button>
+        <div class="panel">
+            <p><strong>Target 11.3:</strong> By 2030, enhance inclusive and sustainable urbanization and capacity for participatory, integrated and sustainable human settlement planning and management in all countries.</p>
+            <p><strong>Indicator 11.3.1:</strong> Ratio of land consumption rate to population growth rate.</p>
+        </div>
+
+        <h2>Refined Business Cases Based on SDGs</h2>
+
+        <button class="accordion">1. Commercial Complex</button>
+        <div class="panel">
+            <ul>
+                <li>Eco-Friendly Design and Operations: Sustainable building practices, solar panels, energy-efficient HVAC systems, water conservation measures.</li>
+                <li>Waste Reduction and Recycling: Comprehensive recycling program and proper disposal of waste.</li>
+                <li>Public Space and Green Areas: Green roofs, community spaces, and green parks.</li>
+                <li>Smart Mobility Solutions: EV charging stations and bike-sharing infrastructure.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">2. Petrol Pumps</button>
+        <div class="panel">
+            <ul>
+                <li>Transition to Cleaner Fuels: EV charging stations and alternative fuels like CNG.</li>
+                <li>Sustainable Operations: Measures to reduce leaks, spills, and air pollution.</li>
+                <li>Eco-Friendly Infrastructure: Use of renewable energy technologies like solar panels.</li>
+                <li>Waste Management: Recycling hazardous waste such as used motor oils.</li>
+                <li>Community and Health Impact: Designing for minimal environmental impact.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">3. Banks</button>
+        <div class="panel">
+            <ul>
+                <li>Promote Financial Inclusion: Accessible banking services for underserved populations.</li>
+                <li>Sustainable Financing: Investments in green infrastructure and sustainable projects.</li>
+                <li>Green Banking: Prioritizing financing for environmentally sustainable projects.</li>
+                <li>Resilient Infrastructure: Climate-resilient physical and digital branches.</li>
+                <li>Community Engagement: Supporting urban development projects.</li>
+            </ul>
+        </div>
+
+        <h2>Course Reflections</h2>
+
+        <button class="accordion">1. Problems in Nature and Algorithm Techniques</button>
+        <div class="panel">
+            <p>Iteration, Recursion, and Backtracking techniques and their real-world applications, including optimization and computational tasks.</p>
+        </div>
+
+        <button class="accordion">2. Space and Time Efficiency</button>
+        <div class="panel">
+            <p>Importance of Big O notation and classifications of problems by orders of growth.</p>
+        </div>
+
+        <button class="accordion">3. Takeaways from Chapter 2</button>
+        <div class="panel">
+            <p>Design principles like Divide and Conquer, Greedy Algorithms, and Dynamic Programming.</p>
+        </div>
+
+        <button class="accordion">4. Hierarchical Data and Tree Structures</button>
+        <div class="panel">
+            <p>Various tree structures like Binary Search Tree, AVL Tree, and Red-Black Tree, and their applications.</p>
+        </div>
+
+        <button class="accordion">5. Array Query Algorithms</button>
+        <div class="panel">
+            <p>Efficient algorithms for processing array data, like Prefix Sum and Binary Indexed Tree.</p>
+        </div>
+
+        <button class="accordion">6. Difference Between Trees and Graphs</button>
+        <div class="panel">
+            <p>Tree and graph structures, their differences, and traversal methods.</p>
+        </div>
+
+        <button class="accordion">7. Sorting and Searching Algorithms</button>
+        <div class="panel">
+            <p>Overview of key sorting and searching algorithms and their applications.</p>
+        </div>
+
+        <button class="accordion">8. Graph Algorithms</button>
+        <div class="panel">
+            <p>Spanning trees and shortest path algorithms like Dijkstra’s and Floyd-Warshall.</p>
+        </div>
+
+        <button class="accordion">9. Algorithm Design Techniques</button>
+        <div class="panel">
+            <p>Brute Force, Divide and Conquer, Greedy Algorithms, and Dynamic Programming.</p>
+        </div>
+
+        <a href="index.html">Back to Main Page</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Business Cases and SDG Mapping. All rights reserved.
+    </div>
+</body>
+</html>
