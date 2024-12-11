@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Cases and SDG Mapping</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #eaf4fc);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 20px;
+            font-size: 1.8rem;
+        }
+
+        .accordion {
+            background-color: #f1f1f1;
+            color: #444;
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: background-color 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .panel {
+            padding: 0 10px;
+            display: none;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        a {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mapping Business Cases to SDG Targets and Indicators</h1>
+
+        <button class="accordion">Case 1: Hospital</button>
+        <div class="panel">
+            <p><strong>Target 11.5.1:</strong> Number of deaths, missing persons, and directly affected persons attributed to disasters per 100,000 population.</p>
+            <p><strong>Target 11.5.2:</strong> Direct economic loss in relation to global GDP, damage to critical infrastructure, and number of disruptions to basic services, attributed to disasters.</p>
+        </div>
+
+        <button class="accordion">Case 2: School</button>
+        <div class="panel">
+            <p><strong>Target 11.2.1:</strong> Proportion of population that has convenient access to public transport, by sex, age, and persons with disabilities.</p>
+            <p><strong>Target 11.7.1:</strong> Average share of the built-up area of cities that is open space for public use for all, by sex, age, and persons with disabilities.</p>
+        </div>
+
+        <button class="accordion">Case 3: Transport</button>
+        <div class="panel">
+            <p><strong>Target 11.2.1:</strong> Proportion of population that has convenient access to public transport, by sex, age, and persons with disabilities.</p>
+            <p><strong>Target 11.3.2:</strong> Proportion of cities with a direct participation structure of civil society in urban planning and management that operate regularly and democratically.</p>
+        </div>
+
+        <button class="accordion">Case 4: IT Park</button>
+        <div class="panel">
+            <p><strong>Target 11.3.1:</strong> Ratio of land consumption rate to population growth rate.</p>
+            <p><strong>Target 11.a.1:</strong> Proportion of population living in cities that implement urban and regional development plans integrating population projections and resource needs, by size of city.</p>
+        </div>
+
+        <h2>Refined Business Cases Based on SDGs</h2>
+
+        <button class="accordion">Case 1: Hospital</button>
+        <div class="panel">
+            <ul>
+                <li>Disaster Preparedness: Hospitals should be equipped to handle disaster-related emergencies and maintain services during crises.</li>
+                <li>Resilient Infrastructure: Designing hospitals with strong infrastructure to withstand natural disasters.</li>
+                <li>Health Services for Vulnerable Groups: Ensuring equal access to health services during and after a disaster, especially for marginalized groups.</li>
+                <li>Emergency Response: Improving healthcare response systems to minimize deaths and injuries from disasters.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">Case 2: School</button>
+        <div class="panel">
+            <ul>
+                <li>Inclusive Access: Ensuring that all students, including those with disabilities, have access to convenient public transport to and from schools.</li>
+                <li>Green School Spaces: Designing school campuses with open spaces and recreational areas accessible to all students.</li>
+                <li>Safe School Infrastructure: Ensuring school buildings and facilities are resilient to disasters and provide a safe learning environment.</li>
+                <li>Education for Sustainable Development: Teaching students about sustainability and the importance of public space in cities.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">Case 3: Transport</button>
+        <div class="panel">
+            <ul>
+                <li>Access to Public Transport: Developing affordable and accessible public transport systems for all demographic groups, including persons with disabilities.</li>
+                <li>Sustainable Transport: Implementing eco-friendly transport systems like electric buses and bike-sharing.</li>
+                <li>Urban Mobility: Promoting efficient mobility systems that minimize traffic congestion and reduce carbon footprints.</li>
+                <li>Democratic Participation in Urban Planning: Ensuring that citizens actively participate in planning sustainable transport solutions.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">Case 4: IT Park</button>
+        <div class="panel">
+            <ul>
+                <li>Sustainable Development: Implementing urban and regional plans that balance population growth with resource needs, and optimize land use.</li>
+                <li>Smart Infrastructure: Incorporating smart technologies in IT parks to enhance productivity and reduce environmental impact.</li>
+                <li>Resource Efficiency: Focusing on energy efficiency and waste reduction in IT park buildings and operations.</li>
+                <li>Urban-Rural Integration: Creating IT parks that contribute to the broader urban-rural development strategy.</li>
+            </ul>
+        </div>
+
+        <a href="index.html">Back to Main Page</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Business Cases and SDG Mapping. All rights reserved.
+    </div>
+</body>
+</html>
