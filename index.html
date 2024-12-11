@@ -3,55 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palghar: A Potential City Location</title>
+    <title>City Designing</title>
     <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f9f9f9, #eaf4fc);
+            background: linear-gradient(135deg, #eaf4fc, #f9fafe);
             color: #333;
             line-height: 1.6;
-            margin: 0;
             padding: 20px;
         }
 
+        /* Container Styling */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             background: #ffffff;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        /* City Name Section */
+        .city-name {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #555;
+            margin: 20px 0;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            background: #f9f9f9;
+        }
+
+        /* Image Styling */
+        img {
+            display: block;
+            margin: 20px auto;
+            border-radius: 12px;
+            border: 3px solid #007bff;
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Section Styling */
+        section {
             padding: 20px;
         }
 
-        h1 {
-            text-align: center;
-            color: #007bff;
-            font-size: 2.5rem;
-        }
-
         h2 {
+            font-size: 2rem;
             color: #007bff;
-            margin-top: 20px;
-            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
+        /* List Styling */
         ul {
-            padding-left: 20px;
+            padding-left: 25px;
+            list-style: disc;
         }
 
-        li {
+        ul li {
             margin: 10px 0;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
         }
 
+        /* Team Info Styling */
+        .team-info {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f1faff;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+        }
+
+        .team-member {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .team-member strong {
+            color: #007bff;
+        }
+
+        .team-member a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .team-member a:hover {
+            color: #003d99;
+        }
+
+        /* Footer Styling */
         .footer {
             text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            padding: 15px 0;
+            background: #f1f1f1;
             color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
         }
 
-        a {
+        /* Button Styling */
+        .btn {
             display: inline-block;
             background: #007bff;
             color: white;
@@ -60,35 +151,40 @@
             font-size: 1rem;
             font-weight: bold;
             border-radius: 8px;
-            margin-top: 15px;
+            margin: 15px auto;
             text-decoration: none;
             text-align: center;
             transition: background 0.3s ease, transform 0.2s ease;
         }
 
-        a:hover {
+        .btn:hover {
             background: #0056b3;
             transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            ul li {
+                font-size: 1rem;
+            }
+
+            .team-member {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Palghar: A Potential City Location</h1>
-        <div class="insights">
-            <h2>Why Choose Palghar?</h2>
-            <ul>
-                <li><strong>Strategic Location:</strong> Palghar is near Mumbai, one of India’s largest economic hubs. It benefits from good connectivity through railways and roads, making it accessible while offering opportunities to decongest Mumbai.</li>
-                <li><strong>Natural Resources and Environment:</strong> The region has a mix of natural beauty, agricultural land, and coastal areas, making it attractive for balanced urban and rural development.</li>
-                <li><strong>Affordable Land:</strong> Compared to Mumbai and Thane, land prices in Palghar are relatively affordable, providing a cost-effective opportunity for large-scale development.</li>
-                <li><strong>Existing Infrastructure:</strong> Palghar already has a growing infrastructure with residential projects, schools, and hospitals. The planned Delhi-Mumbai Industrial Corridor (DMIC) further enhances its potential.</li>
-                <li><strong>Economic Opportunities:</strong> The city can attract investments in industrial zones, IT parks, and tourism due to its proximity to Mumbai and existing workforce availability.</li>
-            </ul>
+        <!-- Header Section -->
+        <div class="header">
+            <h1>City Designing</h1>
         </div>
-        <a href="index.html">Back to Main Page</a>
-    </div>
-    <div class="footer">
-        &copy; 2024 Palghar Development Insights. All rights reserved.
-    </div>
-</body>
-</html>
