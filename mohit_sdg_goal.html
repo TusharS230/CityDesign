@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Cases and SDG Mapping</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #eaf4fc);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 20px;
+            font-size: 1.8rem;
+        }
+
+        .accordion {
+            background-color: #f1f1f1;
+            color: #444;
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: background-color 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .panel {
+            padding: 0 10px;
+            display: none;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        a {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mapping Business Cases to SDG Targets and Indicators</h1>
+
+        <button class="accordion">Case 1: Agriculture</button>
+        <div class="panel">
+            <p><strong>Target 11.3.1:</strong> Ensuring sustainable land use for urban-rural integration.</p>
+            <p><strong>Explanation:</strong> Agriculture promotes sustainable food production and rural development in harmony with urban expansion.</p>
+        </div>
+
+        <button class="accordion">Case 2: Dam</button>
+        <div class="panel">
+            <p><strong>Target 11.5.1:</strong> Reduce disaster-related impacts, including water management.</p>
+            <p><strong>Explanation:</strong> Dams contribute to sustainable water supply and flood control while ensuring climate resilience.</p>
+        </div>
+
+        <button class="accordion">Case 3: Residential Area</button>
+        <div class="panel">
+            <p><strong>Target 11.2.1:</strong> Access to safe, affordable housing and transportation.</p>
+            <p><strong>Explanation:</strong> Residential areas need proper planning for housing, infrastructure, and transport systems.</p>
+        </div>
+
+        <h2>Refined Business Cases Based on SDGs</h2>
+
+        <button class="accordion">Case 1: Agriculture</button>
+        <div class="panel">
+            <ul>
+                <li>Sustainable Agricultural Practices: Eco-friendly farming techniques, organic farming, and use of renewable resources.</li>
+                <li>Land Management: Efficient land use, integrating agricultural activities with urban planning to ensure balanced development.</li>
+                <li>Food Security: Promoting local food production and reducing food waste.</li>
+                <li>Climate Resilience: Developing adaptive farming techniques to address climate challenges.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">Case 2: Dam</button>
+        <div class="panel">
+            <ul>
+                <li>Water Management: Sustainable water use through proper storage and distribution systems.</li>
+                <li>Flood Control: Dams prevent floods and reduce risk during heavy rains, thus ensuring safety for urban and rural populations.</li>
+                <li>Energy Generation: Dams contribute to renewable energy production through hydropower generation.</li>
+                <li>Climate Adaptation: Ensuring long-term water resource sustainability in the face of climate change.</li>
+            </ul>
+        </div>
+
+        <button class="accordion">Case 3: Residential Area</button>
+        <div class="panel">
+            <ul>
+                <li>Affordable Housing: Ensuring that housing is accessible to all income groups.</li>
+                <li>Sustainable Urban Design: Planning for energy efficiency, waste management, and green spaces.</li>
+                <li>Public Transport: Developing sustainable and affordable transportation systems to reduce traffic and pollution.</li>
+                <li>Inclusive Urban Development: Creating residential areas that cater to diverse populations and provide equal access to services.</li>
+            </ul>
+        </div>
+
+        <a href="index.html">Back to Main Page</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Business Cases and SDG Mapping. All rights reserved.
+    </div>
+</body>
+</html>
