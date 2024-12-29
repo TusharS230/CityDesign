@@ -57,7 +57,7 @@
         }
         .graph-container {
             margin-top: 30px;
-            height: 500px;
+            height: 500px;  /* Set the graph container size */
             border: 2px solid #ddd;
             background-color: #fff;
         }
@@ -246,7 +246,7 @@ int main() {
                 color: { color: '#00BFFF', highlight: '#00BFFF' },
                 width: 2
             },
-            physics: true
+            physics: true  // Enables physics for node movements
         };
         var network = new vis.Network(container, data, options);
     </script>
