@@ -204,6 +204,65 @@ int main() {
 </code>
         </pre>
 
+        <h2>C++ Code Implementation: Merge Sort</h2>
+        <pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+void merge(vector&lt;int&gt;& arr, int left, int right) {
+    if (left &gt;= right) return;
+    int mid = left + (right - left) / 2;
+
+    merge(arr, left, mid); // Left half
+    merge(arr, mid + 1, right); // Right half
+
+    vector&lt;int&gt; temp(right - left + 1);
+    int i = left, j = mid + 1, k = 0;
+    while (i &lt;= mid &amp;&amp; j &lt;= right) {
+        if (arr[i] &lt;= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+        }
+    }
+    while (i &lt;= mid) temp[k++] = arr[i++];
+    while (j &lt;= right) temp[k++] = arr[j++];
+
+    for (int i = 0; i &lt; temp.size(); i++) {
+        arr[left + i] = temp[i];
+    }
+}
+
+void mergeSort(vector&lt;int&gt;& arr) {
+    merge(arr, 0, arr.size() - 1);
+}
+
+int main() {
+    vector&lt;int&gt; arr = {38, 27, 43, 3, 9, 82, 10};
+
+    cout &lt;&lt; "Original array: ";
+    for (auto num : arr) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    mergeSort(arr);
+
+    cout &lt;&lt; "Sorted array: ";
+    for (auto num : arr) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code>
+        </pre>
+
         <footer>
             <p>&copy; 2024 SDG Residential Area and Transportation</p>
         </footer>
