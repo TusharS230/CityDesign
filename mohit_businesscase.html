@@ -35,77 +35,56 @@
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>Sustainable Land Use for Urban-Rural Integration</h1>
         <p><strong>Target 11.3.1</strong>: Ensuring sustainable land use for urban-rural integration is crucial for balancing urban growth with rural development. This goal aims to promote sustainable food production and rural development while accommodating urban expansion. This page explains how we can model the problem and solve it using Dijkstra's algorithm.</p>
-
         <h2>Solution Approach</h2>
         <p>The problem of sustainable land use can be modeled as a graph problem, where both urban and rural areas are nodes. The edges represent possible transitions or connections between these areas, which can have costs such as environmental impact, infrastructure requirements, or the cost of land conversion.</p>
-
         <p>We will apply <strong>Dijkstra's Algorithm</strong> to find the optimal paths for land use, minimizing various costs while considering sustainability in urban-rural integration.</p>
-
         <h2>Graph Representation</h2>
         <p>The approach involves creating a graph where:</p>
         <ul>
             <li>Nodes represent land areas (both urban and rural).</li>
             <li>Edges represent transitions between these areas, with each edge having a weight that signifies the cost of land use change (e.g., environmental impact, infrastructure development cost).</li>
         </ul>
-
         <h2>Dijkstra's Algorithm for Optimization</h2>
         <p>We can use Dijkstra’s algorithm to compute the minimum cost paths from one area (e.g., an urban area) to all other areas. The algorithm helps us identify the most efficient land-use transitions that balance development and sustainability.</p>
-
         <h3>C++ Code Implementation</h3>
         <p>The following C++ code demonstrates how we can implement the graph and Dijkstra’s algorithm to solve this problem:</p>
-
         <div class="code-block">
             <pre>
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <climits>
-
 using namespace std;
-
-// Graph representation: each area is a node, edges represent possible transitions
 class Graph {
 public:
-    // Define graph as a vector of vectors of pairs (neighbor, cost)
     vector<vector<pair<int, int>>> adj;
 
     Graph(int n) {
         adj.resize(n);
     }
-
     void add_edge(int from, int to, int cost) {
         adj[from].push_back({to, cost});
         adj[to].push_back({from, cost});
     }
-
     vector<int> dijkstra(int start, int n) {
-        // Priority queue to store nodes with the current shortest distance
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         vector<int> dist(n, INT_MAX);
         dist[start] = 0;
         pq.push({0, start});
-
         while (!pq.empty()) {
             int current_distance = pq.top().first;
             int current_node = pq.top().second;
             pq.pop();
-
-            // Skip nodes that have already been processed with a shorter distance
             if (current_distance > dist[current_node]) {
                 continue;
             }
-
-            // Explore neighbors
             for (auto neighbor : adj[current_node]) {
                 int next_node = neighbor.first;
                 int weight = neighbor.second;
                 int distance = current_distance + weight;
-
-                // If the new distance is shorter, update it
                 if (distance < dist[next_node]) {
                     dist[next_node] = distance;
                     pq.push({distance, next_node});
@@ -115,31 +94,21 @@ public:
         return dist;
     }
 };
-
 int main() {
-    // Create a graph with urban and rural areas
     Graph graph(4); // 4 areas: 0 -> Urban Area 1, 1 -> Urban Area 2, 2 -> Rural Area 1, 3 -> Rural Area 2
-
-    // Add edges (land transitions between areas)
-    graph.add_edge(0, 2, 10);  // Cost to convert or integrate land
-    graph.add_edge(0, 1, 5);   // Cost for urban expansion
-    graph.add_edge(2, 3, 2);   // Cost for agricultural development
-    graph.add_edge(1, 3, 7);   // Mixed transition cost
-
-    // Run Dijkstra's Algorithm from 'Urban Area 1' (index 0)
+    graph.add_edge(0, 2, 10); 
+    graph.add_edge(0, 1, 5);  
+    graph.add_edge(2, 3, 2);  
+    graph.add_edge(1, 3, 7);  
     vector<int> distances = graph.dijkstra(0, 4);
-
-    // Print out the minimum cost for each area
     cout << "Minimum cost for each area from 'Urban Area 1':\n";
     for (int i = 0; i < distances.size(); i++) {
         cout << "Area " << i << ": " << distances[i] << endl;
     }
-
     return 0;
 }
             </pre>
         </div>
-
         <h2>Explanation of the Code</h2>
         <p>The code implements a graph where each node represents an area (urban or rural), and each edge between the nodes represents the cost of transitioning between land uses. Dijkstra's algorithm is used to find the minimum cost to reach each area starting from a specific urban area.</p>
 
@@ -160,7 +129,6 @@ Area 3: 12
         <p>By applying Dijkstra's algorithm, we can optimize land use for urban-rural integration. This ensures that urban expansion does not come at the cost of rural development, promoting sustainable land use in line with Target 11.3.1 of the Sustainable Development Goals.</p>
 
         <footer>
-            <p>Created with ❤️ for Sustainable Development | GitHub Page</p>
         </footer>
     </div>
 
