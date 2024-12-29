@@ -216,10 +216,10 @@ Area 4: 10
     <script>
         // Create the data for nodes and edges
         var nodes = new vis.DataSet([
-            { id: 0, label: 'Dam 1' },
-            { id: 1, label: 'Dam 2' },
-            { id: 2, label: 'River A' },
-            { id: 3, label: 'Floodplain X' }
+            { id: 0, label: 'Dam 1', x: 0, y: 0 },
+            { id: 1, label: 'Dam 2', x: 200, y: 0 },
+            { id: 2, label: 'River A', x: 100, y: 100 },
+            { id: 3, label: 'Floodplain X', x: 100, y: 200 }
         ]);
 
         var edges = new vis.DataSet([
@@ -232,7 +232,14 @@ Area 4: 10
         // Create the network
         var container = document.getElementById('graph');
         var data = { nodes: nodes, edges: edges };
-        var options = {};
+        var options = {
+            physics: false,  // Disable physics to keep the nodes in fixed positions
+            edges: {
+                smooth: {
+                    type: 'continuous'
+                }
+            }
+        };
         var network = new vis.Network(container, data, options);
     </script>
 </body>
