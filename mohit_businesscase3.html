@@ -68,7 +68,7 @@
 
     <div class="content">
         <h1>SDG Target: Residential Area and Transportation in Maharashtra</h1>
-        <p>This page demonstrates a city design for Maharashtra, India, with a focus on residential areas and transportation hubs. We apply the Bellman-Ford algorithm to find the shortest path between residential areas and key transportation points in a city layout of 1500 km².</p>
+        <p>This page demonstrates a city design for Maharashtra, India, with a focus on residential areas and transportation hubs. We apply various algorithms like Dijkstra's, Bellman-Ford, Prim's, DFS, and Boyer-Moore to explore shortest paths and efficient searching in a transportation layout.</p>
 
         <h2>Residential Areas and Transportation Table</h2>
         <p>The table below represents residential areas and transportation hubs in the city design:</p>
@@ -204,67 +204,87 @@ int main() {
 </code>
         </pre>
 
-        <h2>C++ Code Implementation: Merge Sort</h2>
+        <h2>C++ Code Implementation: Dijkstra's Algorithm</h2>
         <pre>
 <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
 
 using namespace std;
 
-void merge(vector&lt;int&gt;& arr, int left, int right) {
-    if (left &gt;= right) return;
-    int mid = left + (right - left) / 2;
+class Graph {
+public:
+    int V;
+    vector&lt;pair&lt;int, int&gt;&gt; *adj;
 
-    merge(arr, left, mid); // Left half
-    merge(arr, mid + 1, right); // Right half
+    Graph(int V);
+    void addEdge(int u, int v, int weight);
+    void dijkstra(int source);
+};
 
-    vector&lt;int&gt; temp(right - left + 1);
-    int i = left, j = mid + 1, k = 0;
-    while (i &lt;= mid &amp;&amp; j &lt;= right) {
-        if (arr[i] &lt;= arr[j]) {
-            temp[k++] = arr[i++];
-        } else {
-            temp[k++] = arr[j++];
-        }
-    }
-    while (i &lt;= mid) temp[k++] = arr[i++];
-    while (j &lt;= right) temp[k++] = arr[j++];
-
-
-    for (int i = 0; i &lt; temp.size(); i++) {
-        arr[left + i] = temp[i];
-    }
+Graph::Graph(int V) {
+    this-&gt;V = V;
+    adj = new vector&lt;pair&lt;int, int&gt;&gt;[V];
 }
 
-void mergeSort(vector&lt;int&gt;& arr) {
-    merge(arr, 0, arr.size() - 1);
+void Graph::addEdge(int u, int v, int weight) {
+    adj[u].push_back(make_pair(v, weight));
+    adj[v].push_back(make_pair(u, weight));  // For undirected graph
+}
+
+void Graph::dijkstra(int source) {
+    vector&lt;int&gt; dist(V, INT_MAX);
+    dist[source] = 0;
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
+    pq.push(make_pair(0, source));
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (auto neighbor : adj[u]) {
+            int v = neighbor.first;
+            int weight = neighbor.second;
+            if (dist[u] + weight &lt; dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push(make_pair(dist[v], v));
+            }
+        }
+    }
+
+    cout &lt;&lt; "Shortest distances from source " &lt;&lt; source &lt;&lt; ":\n";
+    for (int i = 0; i &lt; V; i++) {
+        if (dist[i] == INT_MAX) {
+            cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; " is unreachable\n";
+        } else {
+            cout &lt;&lt; "Distance to node " &lt;&lt; i &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; endl;
+        }
+    }
 }
 
 int main() {
-    vector&lt;int&gt; arr = {38, 27, 43, 3, 9, 82, 10};
+    Graph g(6);
 
-    cout &lt;&lt; "Original array: ";
-    for (auto num : arr) {
-        cout &lt;&lt; num &lt;&lt; " ";
-    }
-    cout &lt;&lt; endl;
+    g.addEdge(0, 1, 4);
+    g.addEdge(0, 2, 1);
+    g.addEdge(2, 1, 2);
+    g.addEdge(1, 3, 5);
+    g.addEdge(2, 3, 8);
+    g.addEdge(3, 4, 3);
+    g.addEdge(4, 5, 6);
+    g.addEdge(5, 3, 2);
+    g.addEdge(3, 5, 7);
 
-    mergeSort(arr);
-
-    cout &lt;&lt; "Sorted array: ";
-    for (auto num : arr) {
-        cout &lt;&lt; num &lt;&lt; " ";
-    }
-    cout &lt;&lt; endl;
+    g.dijkstra(0);
 
     return 0;
 }
 </code>
         </pre>
 
-        <h2>C++ Code Implementation: Breadth-First Search (BFS)</h2>
+        <h2>C++ Code Implementation: Prim's Algorithm</h2>
         <pre>
 <code>
 #include &lt;iostream&gt;
@@ -276,11 +296,92 @@ using namespace std;
 class Graph {
 public:
     int V;
+    vector&lt;pair&lt;int, int&gt;&gt; *adj;
+
+    Graph(int V);
+    void addEdge(int u, int v, int weight);
+    void prims();
+};
+
+Graph::Graph(int V) {
+    this-&gt;V = V;
+    adj = new vector&lt;pair&lt;int, int&gt;&gt;[V];
+}
+
+void Graph::addEdge(int u, int v, int weight) {
+    adj[u].push_back(make_pair(v, weight));
+    adj[v].push_back(make_pair(u, weight));  // For undirected graph
+}
+
+void Graph::prims() {
+    vector&lt;int&gt; key(V, INT_MAX);
+    vector&lt;bool&gt; inMST(V, false);
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
+
+    key[0] = 0;
+    pq.push(make_pair(0, 0));
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+        inMST[u] = true;
+
+        for (auto neighbor : adj[u]) {
+            int v = neighbor.first;
+            int weight = neighbor.second;
+
+            if (!inMST[v] &amp;&amp; weight &lt; key[v]) {
+                key[v] = weight;
+                pq.push(make_pair(key[v], v));
+            }
+        }
+    }
+
+    cout &lt;&lt; "Edges in MST:\n";
+    for (int i = 0; i &lt; V; i++) {
+        if (key[i] != INT_MAX) {
+            cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; " connected with weight: " &lt;&lt; key[i] &lt;&lt; endl;
+        }
+    }
+}
+
+int main() {
+    Graph g(6);
+
+    g.addEdge(0, 1, 4);
+    g.addEdge(0, 2, 1);
+    g.addEdge(2, 1, 2);
+    g.addEdge(1, 3, 5);
+    g.addEdge(2, 3, 8);
+    g.addEdge(3, 4, 3);
+    g.addEdge(4, 5, 6);
+    g.addEdge(5, 3, 2);
+    g.addEdge(3, 5, 7);
+
+    g.prims();
+
+    return 0;
+}
+</code>
+        </pre>
+
+        <h2>C++ Code Implementation: Depth-First Search (DFS)</h2>
+        <pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Graph {
+public:
+    int V;
     vector&lt;int&gt;* adj;
 
     Graph(int V);
     void addEdge(int u, int v);
-    void BFS(int start);
+    void DFS(int start);
+    void DFSUtil(int v, vector&lt;bool&gt; &visited);
 };
 
 Graph::Graph(int V) {
@@ -293,24 +394,20 @@ void Graph::addEdge(int u, int v) {
     adj[v].push_back(u);
 }
 
-void Graph::BFS(int start) {
-    vector&lt;bool&gt; visited(V, false);
-    queue&lt;int&gt; q;
-    visited[start] = true;
-    q.push(start);
+void Graph::DFSUtil(int v, vector&lt;bool&gt; &visited) {
+    visited[v] = true;
+    cout &lt;&lt; v &lt;&lt; " ";
 
-    while (!q.empty()) {
-        int node = q.front();
-        cout &lt;&lt; node &lt;&lt; " ";
-        q.pop();
-
-        for (int neighbor : adj[node]) {
-            if (!visited[neighbor]) {
-                visited[neighbor] = true;
-                q.push(neighbor);
-            }
+    for (int neighbor : adj[v]) {
+        if (!visited[neighbor]) {
+            DFSUtil(neighbor, visited);
         }
     }
+}
+
+void Graph::DFS(int start) {
+    vector&lt;bool&gt; visited(V, false);
+    DFSUtil(start, visited);
 }
 
 int main() {
@@ -323,8 +420,52 @@ int main() {
     g.addEdge(3, 4);
     g.addEdge(4, 5);
 
-    cout &lt;&lt; "Breadth-First Search starting from node 0:\n";
-    g.BFS(0);
+    cout &lt;&lt; "Depth-First Search starting from node 0:\n";
+    g.DFS(0);
+
+    return 0;
+}
+</code>
+        </pre>
+
+        <h2>C++ Code Implementation: Boyer-Moore Algorithm</h2>
+        <pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+void boyerMooreSearch(string text, string pattern) {
+    int m = pattern.size();
+    int n = text.size();
+    vector&lt;int&gt; badChar(256, -1);
+
+    for (int i = 0; i &lt; m; i++) {
+        badChar[pattern[i]] = i;
+    }
+
+    int s = 0;
+    while (s &lt;= n - m) {
+        int j = m - 1;
+        while (j &gt;= 0 &amp;&amp; pattern[j] == text[s + j]) {
+            j--;
+        }
+        if (j &lt; 0) {
+            cout &lt;&lt; "Pattern found at index " &lt;&lt; s &lt;&lt; endl;
+            s += (s + m &lt; n) ? m - badChar[text[s + m]] : 1;
+        } else {
+            s += max(1, j - badChar[text[s + j]]);
+        }
+    }
+}
+
+int main() {
+    string text = "ABAAABCD";
+    string pattern = "ABC";
+
+    boyerMooreSearch(text, pattern);
 
     return 0;
 }
@@ -342,7 +483,7 @@ int main() {
     <!-- JavaScript for rendering the graph -->
     <script>
         // Create the data for nodes and edges
-        var nodes = new vis.DataSet([
+        var nodes = new vis.DataSet([  
             { id: 0, label: 'Residential Area 1' },
             { id: 1, label: 'Residential Area 2' },
             { id: 2, label: 'Bus Terminal' },
@@ -350,7 +491,7 @@ int main() {
             { id: 4, label: 'Hospital' }
         ]);
 
-        var edges = new vis.DataSet([
+        var edges = new vis.DataSet([  
             { from: 0, to: 1, label: 'Distance 10' },
             { from: 0, to: 2, label: 'Distance 15' },
             { from: 1, to: 3, label: 'Distance 20' },
