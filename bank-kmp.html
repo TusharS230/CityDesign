@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warshall's Algorithm Implementation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        pre {
+            background-color: #2e2e2e;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            text-align: left;
+            font-size: 1.2em;
+        }
+        .output {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 1.1em;
+            text-align: left;
+        }
+        .output code {
+            background-color: #f8f9fa;
+            padding: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Warshall's Algorithm - Transitive Closure</h1>
+        
+        <p>The following C++ code calculates the transitive closure of a graph using Warshall's algorithm.</p>
+
+        <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+void warshall(vector&lt;vector&lt;int&gt;&gt;&amp; reach) {
+    int V = reach.size();
+    for (int k = 0; k &lt; V; ++k) {
+        for (int i = 0; i &lt; V; ++i) {
+            for (int j = 0; j &lt; V; ++j) {
+                reach[i][j] = reach[i][j] || (reach[i][k] &amp;&amp; reach[k][j]);
+            }
+        }
+    }
+}
+
+int main() {
+    int V = 5; // Number of bank branches (or ATMs)
+    vector&lt;vector&lt;int&gt;&gt; reach = {
+        {0, 1, 1, 0, 0},
+        {1, 0, 1, 0, 0},
+        {1, 1, 0, 1, 1},
+        {0, 0, 1, 0, 1},
+        {0, 0, 1, 1, 0}
+    };
+
+    warshall(reach);
+
+    cout &lt;&lt; "Transitive Closure (Reachability between branches):\n";
+    for (int i = 0; i &lt; V; ++i) {
+        for (int j = 0; j &lt; V; ++j) {
+            cout &lt;&lt; reach[i][j] &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}
+        </pre>
+
+        <div class="output">
+            <h3>Output:</h3>
+            <pre><code>Transitive Closure (Reachability between branches):
+1 1 1 0 0
+1 1 1 0 0
+1 1 1 1 1
+0 0 1 1 1
+0 0 1 1 1</code></pre>
+        </div>
+    </div>
+
+</body>
+</html>
