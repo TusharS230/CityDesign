@@ -110,6 +110,20 @@
             color: white;
         }
 
+        /* Graph Styling */
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        svg {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
+
         /* Footer Styling */
         .footer {
             text-align: center;
@@ -165,55 +179,43 @@
             </ul>
         </section>
 
-        <!-- Design Considerations -->
+        <!-- Algorithms -->
         <section>
-            <h2>Design Considerations</h2>
+            <h2>Algorithms Used</h2>
             <ul>
-                <li><strong>Universal Design:</strong> Creating spaces that accommodate all individuals, regardless of age or ability.</li>
-                <li><strong>Surveillance and Lighting:</strong> Ensuring adequate lighting and surveillance systems to prevent harassment and ensure safety in and around the police station.</li>
-                <li><strong>Separation of Spaces:</strong> Designating safe spaces for women, children, and vulnerable individuals to prevent potential harassment in communal areas.</li>
+                <li><strong>DFS (Depth First Search):</strong> A graph traversal algorithm used to explore nodes and edges of a graph.</li>
+                <li><strong>BFS (Breadth First Search):</strong> A graph traversal algorithm that explores nodes level by level.</li>
+                <li><strong>Bubble Sort:</strong> A simple sorting algorithm that compares adjacent elements and swaps them if necessary.</li>
+                <li><strong>Quick Sort:</strong> A divide-and-conquer sorting algorithm that selects a pivot and partitions the array around it.</li>
+                <li><strong>Dijkstra's Algorithm:</strong> An algorithm for finding the shortest path between nodes in a graph.</li>
             </ul>
         </section>
 
-        <!-- Design Layouts -->
+        <!-- Graph Section -->
         <section>
-            <h2>Design Layout</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Space Allocation</th>
-                        <th>Design Features</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lobby Area</td>
-                        <td>500 sq ft</td>
-                        <td>Well-lit, clear signage, and seating for waiting.</td>
-                    </tr>
-                    <tr>
-                        <td>Interview Rooms</td>
-                        <td>3 rooms, 200 sq ft each</td>
-                        <td>Private, soundproof rooms with accessibility features.</td>
-                    </tr>
-                    <tr>
-                        <td>Children's Play Area</td>
-                        <td>150 sq ft</td>
-                        <td>A safe, child-friendly space for children visiting with families.</td>
-                    </tr>
-                    <tr>
-                        <td>Accessible Restrooms</td>
-                        <td>2 restrooms</td>
-                        <td>Designed for all abilities, including wheelchair accessibility.</td>
-                    </tr>
-                    <tr>
-                        <td>Secure Holding Area</td>
-                        <td>250 sq ft</td>
-                        <td>Separate, secure area with monitoring for individuals in custody.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2>Graph Representation</h2>
+            <div class="graph-container">
+                <svg width="500" height="400">
+                    <!-- Nodes -->
+                    <circle cx="250" cy="50" r="30" fill="#007bff" />
+                    <text x="245" y="55" fill="#fff" font-size="12" font-family="Arial">A</text>
+
+                    <circle cx="150" cy="150" r="30" fill="#28a745" />
+                    <text x="135" y="155" fill="#fff" font-size="12" font-family="Arial">B</text>
+
+                    <circle cx="350" cy="150" r="30" fill="#ffc107" />
+                    <text x="335" y="155" fill="#fff" font-size="12" font-family="Arial">C</text>
+
+                    <circle cx="250" cy="300" r="30" fill="#6c757d" />
+                    <text x="225" y="305" fill="#fff" font-size="12" font-family="Arial">D</text>
+
+                    <!-- Edges -->
+                    <line x1="250" y1="50" x2="150" y2="150" stroke="#333" stroke-width="2" />
+                    <line x1="250" y1="50" x2="350" y2="150" stroke="#333" stroke-width="2" />
+                    <line x1="150" y1="150" x2="250" y2="300" stroke="#333" stroke-width="2" />
+                    <line x1="350" y1="150" x2="250" y2="300" stroke="#333" stroke-width="2" />
+                </svg>
+            </div>
         </section>
 
         <!-- Footer -->
