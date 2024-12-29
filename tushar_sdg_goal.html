@@ -96,6 +96,35 @@
             background: #0056b3;
             transform: translateY(-2px);
         }
+
+        .case-links {
+            display: flex;
+            flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.case-link {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 12px 20px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.case-link:hover {
+    background: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -142,37 +171,14 @@
             <p><strong>Indicator 11.7.2:</strong> Proportion of persons victimized by physical or sexual harassment, by sex, age, disability status, and place of occurrence.</p>
         </div>
 
+        
         <h2>Refined Business Cases Based on SDGs</h2>
 
-        <button class="accordion" a href="electricity1.html" target="_blank">Case 1: Electricity (Solar)</button>
-        <button class="accordion">Case 2: Sewage Treatment</button>
-        <div class="panel">
-            <ul>
-                <li>Wastewater Treatment: Improve sewage treatment to prevent pollution and enhance public health.</li>
-                <li>Recycling Water: Implement systems to recycle treated wastewater for use in non-potable applications.</li>
-                <li>Efficient Waste Collection: Ensuring regular and adequate collection of urban solid waste to reduce environmental impact.</li>
-                <li>Green Infrastructure: Integrate green infrastructure into sewage treatment plants to enhance sustainability.</li>
-            </ul>
-        </div>
-
-        <button class="accordion">Case 3: Garbage (Recycle)</button>
-        <div class="panel">
-            <ul>
-                <li>Waste Reduction: Promote recycling programs to reduce waste sent to landfills.</li>
-                <li>Public Awareness: Educate communities about the importance of waste segregation and recycling.</li>
-                <li>Recycling Facilities: Establish efficient recycling centers to manage urban solid waste.</li>
-                <li>Sustainable Urban Living: Promote a circular economy by reusing and recycling materials within cities.</li>
-            </ul>
-        </div>
-
-        <button class="accordion">Case 4: Police Station</button>
-        <div class="panel">
-            <ul>
-                <li>Safe Public Spaces: Improve security in public spaces to enhance accessibility and inclusivity.</li>
-                <li>Public Safety Programs: Implement initiatives to reduce harassment and crime in urban areas.</li>
-                <li>Inclusive Infrastructure: Ensure that police stations and public safety infrastructure are accessible to all, including persons with disabilities.</li>
-                <li>Community Engagement: Involve the community in maintaining safety and security within public spaces.</li>
-            </ul>
+        <div class="case-links">
+            <a href="electricity1.html" target="_blank" class="case-link">Case 1: Electricity (Solar)</a>
+            <a href="sewage_treatment.html" target="_blank" class="case-link">Case 2: Sewage Treatment</a>
+            <a href="garbage_recycle.html" target="_blank" class="case-link">Case 3: Garbage (Recycle)</a>
+            <a href="police_station.html" target="_blank" class="case-link">Case 4: Police Station</a>
         </div>
 
         <a href="index.html">Back to Main Page</a>
