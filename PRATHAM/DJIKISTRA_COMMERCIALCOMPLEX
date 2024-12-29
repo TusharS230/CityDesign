@@ -1,53 +1,90 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <climits>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijkstra's Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .result-item {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dijkstra's Algorithm - Shortest Path</h1>
 
-using namespace std;
+    <div id="result"></div>
 
-typedef pair<int, int> pii; // {distance, node}
+    <script>
+        // Dijkstra's algorithm in JavaScript
+        function dijkstra(V, adj, start) {
+            let dist = new Array(V).fill(Infinity);
+            dist[start] = 0;
+            let pq = new MinPriorityQueue();
+            pq.enqueue([0, start]);
 
-vector<int> dijkstra(int V, vector<vector<pii>>& adj, int start) {
-    vector<int> dist(V, INT_MAX);
-    dist[start] = 0;
-    priority_queue<pii, vector<pii>, greater<pii>> pq;
-    pq.push({0, start});
+            while (!pq.isEmpty()) {
+                let [d, u] = pq.dequeue();
 
-    while (!pq.empty()) {
-        int u = pq.top().second;
-        int d = pq.top().first;
-        pq.pop();
+                if (d > dist[u]) continue;
 
-        if (d > dist[u]) continue;
+                for (let [v, weight] of adj[u]) {
+                    if (dist[u] + weight < dist[v]) {
+                        dist[v] = dist[u] + weight;
+                        pq.enqueue([dist[v], v]);
+                    }
+                }
+            }
+            return dist;
+        }
 
-        for (auto& edge : adj[u]) {
-            int v = edge.first;
-            int weight = edge.second;
-            if (dist[u] + weight < dist[v]) {
-                dist[v] = dist[u] + weight;
-                pq.push({dist[v], v});
+        // Priority Queue Implementation for Dijkstra's Algorithm
+        class MinPriorityQueue {
+            constructor() {
+                this.queue = [];
+            }
+
+            enqueue(item) {
+                this.queue.push(item);
+                this.queue.sort((a, b) => a[0] - b[0]);
+            }
+
+            dequeue() {
+                return this.queue.shift();
+            }
+
+            isEmpty() {
+                return this.queue.length === 0;
             }
         }
-    }
-    return dist;
-}
 
-int main() {
-    int V = 4; // Number of stores/locations
-    vector<vector<pii>> adj(V);
+        // Graph adjacency list representation
+        const V = 4;
+        const adj = [
+            [[1, 1]],             // Store 0 -> Store 1 (weight 1)
+            [[0, 1], [2, 2]],     // Store 1 -> Store 0 (weight 1), Store 1 -> Store 2 (weight 2)
+            [[1, 2], [3, 1]],     // Store 2 -> Store 1 (weight 2), Store 2 -> Store 3 (weight 1)
+            [[2, 1]]              // Store 3 -> Store 2 (weight 1)
+        ];
 
-    adj[0].push_back({1, 1});
-    adj[1].push_back({0, 1});
-    adj[1].push_back({2, 2});
-    adj[2].push_back({1, 2});
-    adj[2].push_back({3, 1});
-    adj[3].push_back({2, 1});
+        // Run Dijkstra starting from store 0
+        const dist = dijkstra(V, adj, 0);
 
-    vector<int> dist = dijkstra(V, adj, 0); // Starting at store 0
-
-    for (int i = 0; i < V; ++i) {
-        cout << "Distance from store 0 to store " << i << " is " << dist[i] << endl;
-    }
-
-    return 0;
-}
+        // Display the results
+        let resultDiv = document.getElementById('result');
+        for (let i = 0; i < V; i++) {
+            resultDiv.innerHTML += `<div class="result-item">Distance from store 0 to store ${i} is ${dist[i]}</div>`;
+        }
+    </script>
+</body>
+</html>
