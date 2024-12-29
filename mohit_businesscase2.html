@@ -50,6 +50,7 @@
         .graph-container {
             margin-top: 30px;
             text-align: center;
+            height: 500px;
         }
     </style>
 </head>
@@ -108,9 +109,7 @@
         <h2>Graph Representation of Water Management</h2>
         <p>Below is a simplified graph of the water management system, where each node represents a dam, river, or floodplain, and the edges represent water flow.</p>
 
-        <div class="graph-container">
-            <canvas id="waterManagementGraph" width="400" height="400"></canvas>
-        </div>
+        <div class="graph-container" id="graph"></div>
 
         <h2>C++ Code Implementation</h2>
         <p>The following C++ code implements the water management network using Bellman-Ford's algorithm:</p>
@@ -213,27 +212,28 @@ Area 4: 10
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script>
-        var ctx = document.getElementById('waterManagementGraph').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'network',
-            data: {
-                nodes: [
-                    { id: 0, label: 'Dam 1' },
-                    { id: 1, label: 'Dam 2' },
-                    { id: 2, label: 'River A' },
-                    { id: 3, label: 'Floodplain X' }
-                ],
-                edges: [
-                    { from: 0, to: 1, label: 'Flow 10' },
-                    { from: 0, to: 2, label: 'Flow 5' },
-                    { from: 2, to: 3, label: 'Flow 3' },
-                    { from: 1, to: 3, label: 'Flow 7' }
-                ]
-            },
-            options: {}
-        });
+        // Create the data for nodes and edges
+        var nodes = new vis.DataSet([
+            { id: 0, label: 'Dam 1' },
+            { id: 1, label: 'Dam 2' },
+            { id: 2, label: 'River A' },
+            { id: 3, label: 'Floodplain X' }
+        ]);
+
+        var edges = new vis.DataSet([
+            { from: 0, to: 1, label: 'Flow 10' },
+            { from: 0, to: 2, label: 'Flow 5' },
+            { from: 2, to: 3, label: 'Flow 3' },
+            { from: 1, to: 3, label: 'Flow 7' }
+        ]);
+
+        // Create the network
+        var container = document.getElementById('graph');
+        var data = { nodes: nodes, edges: edges };
+        var options = {};
+        var network = new vis.Network(container, data, options);
     </script>
 </body>
 </html>
