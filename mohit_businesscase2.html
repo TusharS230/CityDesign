@@ -264,6 +264,65 @@ int main() {
         <h2>Explanation of Heap Sort Code</h2>
         <p>The C++ code implements Heap Sort. It builds a max-heap from the input array, then repeatedly extracts the maximum element and places it at the end of the array. This process continues until the entire array is sorted.</p>
 
+        <h2>Binary Search Tree (BST) Algorithm</h2>
+        <p>Below is a C++ code implementation of the Binary Search Tree (BST):</p>
+
+        <div class="code-block">
+            <pre>
+#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int key;
+    Node* left, * right;
+    Node(int value) {
+        key = value;
+        left = right = nullptr;
+    }
+};
+
+Node* insert(Node* root, int key) {
+    if (root == nullptr) {
+        return new Node(key);
+    }
+    if (key < root->key) {
+        root->left = insert(root->left, key);
+    } else {
+        root->right = insert(root->right, key);
+    }
+    return root;
+}
+
+void inorder(Node* root) {
+    if (root != nullptr) {
+        inorder(root->left);
+        cout << root->key << " ";
+        inorder(root->right);
+    }
+}
+
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+
+    cout << "Inorder traversal of BST: ";
+    inorder(root);
+    cout << endl;
+
+    return 0;
+}
+            </pre>
+        </div>
+
+        <h2>Explanation of BST Code</h2>
+        <p>The C++ code implements a Binary Search Tree (BST). The BST is built by inserting nodes in such a way that for each node, the left child is smaller and the right child is larger. The inorder traversal prints the keys of the tree in sorted order.</p>
+
         <footer>
         </footer>
     </div>
