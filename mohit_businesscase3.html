@@ -208,7 +208,10 @@ int main() {
         </footer>
     </div>
 
+    <!-- Load the vis.js library for the graph -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.0/vis-network.min.js"></script>
+    
+    <!-- JavaScript for rendering the graph -->
     <script>
         // Create the data for nodes and edges
         var nodes = new vis.DataSet([
@@ -243,7 +246,7 @@ int main() {
                 color: { color: '#00BFFF', highlight: '#00BFFF' },
                 width: 2
             },
-            physics: false
+            physics: true
         };
         var network = new vis.Network(container, data, options);
     </script>
