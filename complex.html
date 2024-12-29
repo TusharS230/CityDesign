@@ -11,6 +11,17 @@
 </head>
 <body>
     <h1>C++ BFS Algorithm Code</h1>
+
+    <p>The following code implements the <strong>Breadth-First Search (BFS)</strong> algorithm. This algorithm is especially useful for exploring a graph or a network of connected entities. In this case, we're using BFS to explore the connections between stores in a mall or shopping complex.</p>
+
+    <p><strong>Why we are using BFS:</strong></p>
+    <ul>
+        <li><strong>Level-order traversal:</strong> BFS explores nodes level by level. This is useful when we want to explore all stores near the entrance before moving on to stores further away, as in the case of navigating through a shopping mall.</li>
+        <li><strong>Shortest path in unweighted graphs:</strong> BFS guarantees finding the shortest path between two nodes if all edges have equal weight or cost. For example, if we wanted to find the shortest path from one store to another, BFS would be a great choice.</li>
+        <li><strong>Optimal for finding all reachable nodes:</strong> BFS efficiently visits all reachable nodes, which is useful for applications where we want to explore all possible stores (or nodes) starting from a particular point (like the mall entrance).</li>
+    </ul>
+
+    <h2>Code Implementation:</h2>
     <pre><code class="cpp">
 #include <iostream>
 #include <queue>
@@ -52,6 +63,13 @@ int main() {
     return 0;
 }
     </code></pre>
+
+    <p><strong>Explanation of the Code:</strong></p>
+    <ul>
+        <li>The graph is represented using an adjacency list. Each store is represented as a node, and connections between stores are represented as edges in the graph.</li>
+        <li>The BFS function uses a queue to explore each store, ensuring that we visit each store level by level.</li>
+        <li>The <code>visited</code> set keeps track of stores that have already been visited to avoid revisiting the same store.</li>
+        <li>The program starts the BFS search from store 0 (the entrance) and explores all connected stores.</li>
+    </ul>
 </body>
 </html>
-
