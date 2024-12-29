@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kruskal's Algorithm - Minimum Spanning Tree</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        label, input, button {
+            display: block;
+            margin: 10px 0;
+        }
+        input, button {
+            padding: 8px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3e7;
+            border: 1px solid #c5e6c5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kruskal's Algorithm</h1>
+    <form id="graphForm">
+        <label for="vertices">Number of Petrol Pumps (Vertices):</label>
+        <input type="number" id="vertices" name="vertices" min="1" required>
+
+        <label for="edges">Pipeline Connections (Edges):</label>
+        <textarea id="edges" name="edges" rows="6" placeholder="Format: u v weight (one per line)" required></textarea>
+
+        <button type="button" onclick="calculateMST()">Calculate Minimum Cost</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function calculateMST() {
+            const vertices = parseInt(document.getElementById('vertices').value);
+            const edgesInput = document.getElementById('edges').value.trim();
+            const edges = edgesInput.split('\n').map(line => {
+                const [u, v, weight] = line.split(' ').map(Number);
+                return { u, v, weight };
+            });
+
+            class DisjointSet {
+                constructor(n) {
+                    this.parent = Array.from({ length: n }, (_, i) => i);
+                    this.rank = Array(n).fill(0);
+                }
+                find(x) {
+                    if (this.parent[x] !== x) {
+                        this.parent[x] = this.find(this.parent[x]);
+                    }
+                    return this.parent[x];
+                }
+                union(x, y) {
+                    const rootX = this.find(x);
+                    const rootY = this.find(y);
+                    if (rootX !== rootY) {
+                        if (this.rank[rootX] > this.rank[rootY]) {
+                            this.parent[rootY] = rootX;
+                        } else if (this.rank[rootX] < this.rank[rootY]) {
+                            this.parent[rootX] = rootY;
+                        } else {
+                            this.parent[rootY] = rootX;
+                            this.rank[rootX]++;
+                        }
+                    }
+                }
+            }
+
+            edges.sort((a, b) => a.weight - b.weight);
+
+            const ds = new DisjointSet(vertices);
+            let mstWeight = 0;
+
+            for (const edge of edges) {
+                if (ds.find(edge.u) !== ds.find(edge.v)) {
+                    ds.union(edge.u, edge.v);
+                    mstWeight += edge.weight;
+                }
+            }
+
+            document.getElementById('output').innerHTML = `<strong>Minimum cost to lay down pipelines:</strong> ${mstWeight}`;
+        }
+    </script>
+</body>
+</html>
 
