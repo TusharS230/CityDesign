@@ -204,8 +204,65 @@ Area 4: 10
             </pre>
         </div>
 
-        <h2>Conclusion</h2>
-        <p>By applying Bellman-Ford’s algorithm, we can ensure efficient water management, reduce flood risks, and optimize water flow to enhance climate resilience in the city. This solution supports the SDG Target 11.5.1 to reduce disaster-related impacts through improved water management systems.</p>
+        <h2>Heap Sort Algorithm</h2>
+        <p>Below is a C++ code implementation of the Heap Sort algorithm:</p>
+
+        <div class="code-block">
+            <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void heapify(vector&lt;int&gt;&amp; arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left &lt; n &amp;&amp; arr[left] &gt; arr[largest]) {
+        largest = left;
+    }
+
+    if (right &lt; n &amp;&amp; arr[right] &gt; arr[largest]) {
+        largest = right;
+    }
+
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+
+    // Build max heap
+    for (int i = n / 2 - 1; i &gt;= 0; i--) {
+        heapify(arr, n, i);
+    }
+
+    // One by one extract elements from heap
+    for (int i = n - 1; i &gt;= 0; i--) {
+        swap(arr[0], arr[i]);  // Move current root to end
+        heapify(arr, i, 0);  // call max heapify on the reduced heap
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {12, 11, 13, 5, 6, 7};
+    heapSort(arr);
+    
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; arr.size(); i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+            </pre>
+        </div>
+
+        <h2>Explanation of Heap Sort Code</h2>
+        <p>The C++ code implements Heap Sort. It builds a max-heap from the input array, then repeatedly extracts the maximum element and places it at the end of the array. This process continues until the entire array is sorted.</p>
 
         <footer>
         </footer>
