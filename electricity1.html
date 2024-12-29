@@ -110,6 +110,20 @@
             color: white;
         }
 
+        /* Graph Styling */
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        svg {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
+
         /* Footer Styling */
         .footer {
             text-align: center;
@@ -216,6 +230,33 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+
+        <!-- Graph Section -->
+        <section>
+            <h2>Connection Graph</h2>
+            <div class="graph-container">
+                <svg width="500" height="400">
+                    <!-- Nodes -->
+                    <circle cx="250" cy="50" r="30" fill="#007bff" />
+                    <text x="245" y="55" fill="#fff" font-size="12" font-family="Arial">Plant</text>
+
+                    <circle cx="150" cy="150" r="30" fill="#28a745" />
+                    <text x="135" y="155" fill="#fff" font-size="12" font-family="Arial">Houses</text>
+
+                    <circle cx="350" cy="150" r="30" fill="#ffc107" />
+                    <text x="335" y="155" fill="#fff" font-size="12" font-family="Arial">Industries</text>
+
+                    <circle cx="250" cy="300" r="30" fill="#6c757d" />
+                    <text x="225" y="305" fill="#fff" font-size="12" font-family="Arial">Commercial</text>
+
+                    <!-- Edges -->
+                    <line x1="250" y1="50" x2="150" y2="150" stroke="#333" stroke-width="2" />
+                    <line x1="250" y1="50" x2="350" y2="150" stroke="#333" stroke-width="2" />
+                    <line x1="150" y1="150" x2="250" y2="300" stroke="#333" stroke-width="2" />
+                    <line x1="350" y1="150" x2="250" y2="300" stroke="#333" stroke-width="2" />
+                </svg>
+            </div>
         </section>
 
         <!-- Footer -->
