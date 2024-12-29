@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Designing - Garbage Recycling</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #eaf4fc, #f9fafe);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #28a745, #1c7430);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #28a745;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        p, ul li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 25px;
+            list-style: disc;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        /* Highlight Section */
+        .highlight {
+            background: #f1faff;
+            border-left: 5px solid #28a745;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: "Courier New", Courier, monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .code-block pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 1rem;
+        }
+
+        /* Graph Styling */
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        svg {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #f1f1f1;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            p, ul li {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>City Designing: Garbage Recycling</h1>
+            <p>Enhancing waste management solutions for a cleaner and more sustainable city</p>
+        </div>
+
+        <!-- Garbage Recycling and Waste Management -->
+        <section>
+            <h2>Garbage Recycling and Waste Management</h2>
+            <p>In urban environments, managing waste and ensuring effective recycling practices is key to reducing environmental impact. Recycling helps minimize landfill waste and promotes a circular economy by reusing materials.</p>
+            <div class="highlight">
+                <p><strong>Target 11.6:</strong> By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management.</p>
+                <p><strong>Indicator 11.6.1:</strong> Proportion of urban solid waste regularly collected and with adequate final discharge out of total urban solid waste generated, by cities.</p>
+            </div>
+        </section>
+
+        <!-- Key Benefits -->
+        <section>
+            <h2>Key Benefits</h2>
+            <ul>
+                <li><strong>Reduce Landfill Waste:</strong> Efficient waste management to reduce the amount of waste sent to landfills.</li>
+                <li><strong>Improve Recycling Rates:</strong> Promoting recycling to reuse materials and decrease pollution.</li>
+                <li><strong>Energy Recovery:</strong> Using waste-to-energy technologies to generate power from garbage.</li>
+            </ul>
+        </section>
+
+        <!-- Bubble Sort Code -->
+        <section>
+            <h2>Bubble Sort Algorithm</h2>
+            <div class="code-block">
+                <pre>
+#include &lt;iostream&gt;
+using namespace std;
+
+// Function to perform Bubble Sort
+void bubbleSort(int arr[], int n) {
+    // Outer loop for each pass through the array
+    for (int i = 0; i &lt; n - 1; i++) {
+        // Inner loop for comparing adjacent elements
+        for (int j = 0; j &lt; n - i - 1; j++) {
+            // If the element is greater than the next element, swap them
+            if (arr[j] &gt; arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+// Function to print the array
+void printArray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    cout &lt;&lt; "Original Array: ";
+    printArray(arr, n);
+    
+    bubbleSort(arr, n);  // Calling Bubble Sort
+    
+    cout &lt;&lt; "Sorted Array: ";
+    printArray(arr, n);  // Printing the sorted array
+    
+    return 0;
+}
+                </pre>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2024 City Design Project - Garbage Recycling. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
