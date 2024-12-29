@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>City Travel Map</title>
+  <style>
+    .node {
+      fill: #66b3ff;
+      stroke: #333;
+      stroke-width: 1.5px;
+      cursor: pointer;
+    }
+
+    .link {
+      stroke: #999;
+      stroke-width: 1.5px;
+      stroke-dasharray: 4, 4;
+    }
+
+    text {
+      font-family: sans-serif;
+      font-size: 12px;
+      text-anchor: middle;
+      fill: #333;
+    }
+
+    .distance-label {
+      fill: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>City Travel Map</h1>
+  <svg width="500" height="400"></svg>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    var graph = {
+      "nodes": [
+        {"id": "Pedestrian Crossing"},
+        {"id": "Traffic Light"},
+        {"id": "Entry/Exit"},
+        {"id": "Roundabouts"},
+        {"id": "Congestion Zones"}
+      ],
+      "links": [
+        {"source": 0, "target": 1, "distance": 120},
+        {"source": 0, "target": 3, "distance": 180},
+        {"source": 1, "target": 2, "distance": 200},
+        {"source": 2, "target": 4, "distance": 240},
+        {"source": 3, "target": 4, "distance": 300}
+      ]
+    };
+
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance; }))
+        .force("charge", d3.forceManyBody().strength(-100))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+    var link = svg.append("g")
+        .selectAll("line")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link");
+
+    var node = svg.append("g")
+        .selectAll("circle")
+        .data(graph.nodes)
+        .enter().append("circle")
+        .attr("class", "node")
+        .attr("r", 15)
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended));
+
+    var labels = node.append("text")
+        .text(function(d) { return d.id; })
+        .attr("dy", ".35em");
+
+    var linkLabels = link.append("text")
+        .attr("class", "distance-label")
+        .attr("dy", ".35em")
+        .text(function(d) { return d.distance; });
+
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+    simulation
+        .nodes(graph.nodes)
+        .on("tick", ticked);
+
+    function ticked() {
+      link
+          .attr("x1", function(d) { return d.source.x; })
+          .attr("y1", function(d) { return d.source.y; })
+          .attr("x2", function(d) { return d.target.x; })
+          .attr("y2", function(d) { return d.target.y; });
+
+      node
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; });
+
+      linkLabels
+          .attr("x", function(d) { return (d.source.x + d.target.x) / 2; })
+          .attr("y", function(d) { return (d.source.y + d.target.y) / 2; });
+    }
+  </script>
+</body>
+</html>
