@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prim's Algorithm - Minimum Spanning Tree</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        pre {
+            background-color: #2e2e2e;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            text-align: left;
+            font-size: 1.2em;
+        }
+        .output {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 1.1em;
+            text-align: left;
+        }
+        .output code {
+            background-color: #f8f9fa;
+            padding: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Prim's Algorithm - Minimum Spanning Tree</h1>
+        
+        <p>The following C++ code calculates the minimum cost to connect all petrol pumps using Prim's algorithm.</p>
+
+        <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+
+using namespace std;
+
+typedef pair&lt;int, int&gt; pii; // {cost, node}
+
+int prim(int V, vector&lt;vector&lt;pii&gt;&gt;&amp; adj) {
+    vector&lt;bool&gt; visited(V, false);
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+    pq.push({0, 0});
+    int totalCost = 0;
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int cost = pq.top().first;
+        pq.pop();
+
+        if (visited[u]) continue;
+        visited[u] = true;
+        totalCost += cost;
+
+        for (auto&amp; edge : adj[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+            if (!visited[v]) {
+                pq.push({weight, v});
+            }
+        }
+    }
+    return totalCost;
+}
+
+int main() {
+    int V = 5; // Number of petrol pumps
+    vector&lt;vector&lt;pii&gt;&gt; adj(V);
+
+    adj[0].push_back({1, 10});
+    adj[1].push_back({0, 10});
+    adj[1].push_back({2, 15});
+    adj[2].push_back({1, 15});
+    adj[2].push_back({3, 20});
+    adj[3].push_back({2, 20});
+    adj[3].push_back({4, 25});
+    adj[4].push_back({3, 25});
+    adj[0].push_back({4, 50});
+    adj[4].push_back({0, 50});
+
+    int totalCost = prim(V, adj);
+    cout &lt;&lt; "Minimum cost to connect all petrol pumps: " &lt;&lt; totalCost &lt;&lt; endl;
+
+    return 0;
+}
+        </pre>
+
+        <div class="output">
+            <h3>Output:</h3>
+            <pre><code>Minimum cost to connect all petrol pumps: 75</code></pre>
+        </div>
+    </div>
+
+</body>
+</html>
 
