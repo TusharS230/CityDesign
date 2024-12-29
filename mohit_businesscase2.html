@@ -111,7 +111,7 @@
 
         <div class="graph-container" id="graph"></div>
 
-        <h2>C++ Code Implementation</h2>
+        <h2>C++ Code Implementation for Bellman-Ford Algorithm</h2>
         <p>The following C++ code implements the water management network using Bellman-Ford's algorithm:</p>
 
         <div class="code-block">
@@ -187,25 +187,8 @@ int main() {
             </pre>
         </div>
 
-        <h2>Explanation of the Code</h2>
-        <p>The C++ code models the water management system where nodes represent dams, rivers, and floodplains. Bellman-Ford’s algorithm calculates the minimum cost for water flow between these components. The graph helps optimize water distribution and minimize risks in disaster-prone areas.</p>
-
-        <h2>Example Output</h2>
-        <p>The following output shows the minimum cost paths for water flow:</p>
-
-        <div class="code-block">
-            <pre>
-Minimum cost for each area from 'Dam 1':
-Area 0: 0
-Area 1: 5
-Area 2: 10
-Area 3: 8
-Area 4: 10
-            </pre>
-        </div>
-
         <h2>Heap Sort Algorithm</h2>
-        <p>Below is a C++ code implementation of the Heap Sort algorithm:</p>
+        <p>The following C++ code implements the Heap Sort algorithm:</p>
 
         <div class="code-block">
             <pre>
@@ -261,11 +244,8 @@ int main() {
             </pre>
         </div>
 
-        <h2>Explanation of Heap Sort Code</h2>
-        <p>The C++ code implements Heap Sort. It builds a max-heap from the input array, then repeatedly extracts the maximum element and places it at the end of the array. This process continues until the entire array is sorted.</p>
-
         <h2>Binary Search Tree (BST) Algorithm</h2>
-        <p>Below is a C++ code implementation of the Binary Search Tree (BST):</p>
+        <p>The following C++ code implements a Binary Search Tree (BST):</p>
 
         <div class="code-block">
             <pre>
@@ -320,10 +300,42 @@ int main() {
             </pre>
         </div>
 
-        <h2>Explanation of BST Code</h2>
-        <p>The C++ code implements a Binary Search Tree (BST). The BST is built by inserting nodes in such a way that for each node, the left child is smaller and the right child is larger. The inorder traversal prints the keys of the tree in sorted order.</p>
+        <h2>Bubble Sort Algorithm</h2>
+        <p>The following C++ code implements the Bubble Sort algorithm:</p>
+
+        <div class="code-block">
+            <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void bubbleSort(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    for (int i = 0; i &lt; n - 1; i++) {
+        for (int j = 0; j &lt; n - i - 1; j++) {
+            if (arr[j] &gt; arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {64, 34, 25, 12, 22, 11, 90};
+    bubbleSort(arr);
+    
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; arr.size(); i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+            </pre>
+        </div>
 
         <footer>
+            <p>SDG Target 11.5.1: Disaster Risk Reduction and Water Management</p>
         </footer>
     </div>
 
