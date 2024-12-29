@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Floyd-Warshall Algorithm</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        pre {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 16px;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>C++ Floyd-Warshall Algorithm</h1>
+        <p>This webpage showcases the implementation of the Floyd-Warshall algorithm for finding the shortest paths between all pairs of vertices in a weighted graph. Below is the C++ code:</p>
+        
+        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#define INF 99999999 // A large number to represent infinity
+using namespace std;
+
+class Graph {
+public:
+    int V; // Number of vertices
+    vector&lt;vector&lt;int&gt;&gt; dist;
+
+    // Constructor
+    Graph(int V) {
+        this-&gt;V = V;
+        dist.resize(V, vector&lt;int&gt;(V, INF));
+
+        // Distance from each vertex to itself is 0
+        for (int i = 0; i &lt; V; i++) {
+            dist[i][i] = 0;
+        }
+    }
+
+    // Function to add an edge with weight to the graph
+    void addEdge(int u, int v, int weight) {
+        dist[u][v] = weight;
+    }
+
+    // Floyd-Warshall Algorithm
+    void floydWarshall() {
+        // Iterating through each intermediate vertex
+        for (int k = 0; k &lt; V; k++) {
+            for (int i = 0; i &lt; V; i++) {
+                for (int j = 0; j &lt; V; j++) {
+                    // If the path through vertex k is shorter, update the distance
+                    if (dist[i][k] != INF &amp;&amp; dist[k][j] != INF &amp;&amp; dist[i][j] &gt; dist[i][k] + dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    }
+                }
+            }
+        }
+    }
+
+    // Function to print the distance matrix
+    void printSolution() {
+        for (int i = 0; i &lt; V; i++) {
+            for (int j = 0; j &lt; V; j++) {
+                if (dist[i][j] == INF)
+                    cout &lt;&lt; "INF ";
+                else
+                    cout &lt;&lt; dist[i][j] &lt;&lt; " ";
+            }
+            cout &lt;&lt; endl;
+        }
+    }
+};
+
+int main() {
+    // Create a graph with 4 vertices
+    Graph g(4);
+
+    // Add edges to the graph
+    g.addEdge(0, 1, 5);
+    g.addEdge(0, 2, 10);
+    g.addEdge(1, 2, 2);
+    g.addEdge(1, 3, 1);
+    g.addEdge(2, 3, 3);
+
+    // Apply Floyd-Warshall algorithm
+    g.floydWarshall();
+
+    // Print the shortest path matrix
+    cout &lt;&lt; "Shortest path matrix:" &lt;&lt; endl;
+    g.printSolution();
+
+    return 0;
+}</code></pre>
+    </div>
+
+</body>
+</html>
