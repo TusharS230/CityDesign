@@ -38,12 +38,12 @@
 
     <div class="container">
         <h1>Target 11.5.1: Reduce Disaster-Related Impacts, Including Water Management</h1>
-        <p><strong>Explanation:</strong> Dams play a crucial role in managing water resources, providing flood control, ensuring water supply for agriculture, drinking, and industry, and increasing climate resilience. In this solution, we will model the water management problem using a graph and apply Dijkstra's algorithm to optimize water flow between dams, rivers, and floodplains to reduce disaster risks.</p>
+        <p><strong>Explanation:</strong> Dams play a crucial role in managing water resources, providing flood control, ensuring water supply for agriculture, drinking, and industry, and increasing climate resilience. In this solution, we will model the water management problem using a graph and apply Bellman-Ford's algorithm to optimize water flow between dams, rivers, and floodplains to reduce disaster risks.</p>
 
         <h2>Problem Description</h2>
         <p>We can represent the problem of water management as a graph where each node represents a dam, river, or floodplain. The edges between the nodes represent the flow of water, with each edge having a weight that signifies the cost or difficulty of transferring water (e.g., time, risk, or energy).</p>
         
-        <p>By applying <strong>Dijkstra's Algorithm</strong>, we can compute the minimum cost paths for water flow between these areas, ensuring that we reduce flood risks and optimize water distribution for climate resilience.</p>
+        <p>By applying <strong>Bellman-Ford's Algorithm</strong>, we can compute the minimum cost paths for water flow between these areas, ensuring that we reduce flood risks and optimize water distribution for climate resilience.</p>
 
         <h2>Solution Approach</h2>
         <p>We model the problem as a graph where:</p>
@@ -52,27 +52,25 @@
             <li>Edges represent the flow of water between these nodes, with associated costs (e.g., flood risk, water transfer cost, etc.).</li>
         </ul>
         
-        <p>The objective is to use Dijkstra’s algorithm to find the optimal water flow paths, minimizing the risks associated with flood control and maximizing water availability.</p>
+        <p>The objective is to use Bellman-Ford’s algorithm to find the optimal water flow paths, minimizing the risks associated with flood control and maximizing water availability.</p>
 
         <h2>C++ Code Implementation</h2>
-        <p>The following C++ code demonstrates how we can model the water management problem using a graph and apply Dijkstra's algorithm to optimize water flow between dams, rivers, and floodplains:</p>
+        <p>The following C++ code demonstrates how we can model the water management problem using a graph and apply Bellman-Ford's algorithm to optimize water flow between dams, rivers, and floodplains:</p>
 
         <div class="code-block">
             <pre>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-#include &lt;queue&gt;
 #include &lt;climits&gt;
 
 using namespace std;
 
-// Graph representation: each node represents a dam, river, or floodplain
 class Graph {
 public:
-    vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; adj; // adj[node] = [(neighbor, cost), ...]
+    vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; adj;
 
     Graph(int n) {
-        adj.resize(n); // Initialize the graph with 'n' nodes
+        adj.resize(n);
     }
 
     void add_edge(int from, int to, int cost) {
@@ -80,55 +78,48 @@ public:
         adj[to].push_back({from, cost});
     }
 
-    vector&lt;int&gt; dijkstra(int start, int n) {
-        // Priority queue to store nodes with the current shortest distance
-        priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
+    vector&lt;int&gt; bellmanFord(int start, int n) {
         vector&lt;int&gt; dist(n, INT_MAX);
         dist[start] = 0;
-        pq.push({0, start});
 
-        while (!pq.empty()) {
-            int current_distance = pq.top().first;
-            int current_node = pq.top().second;
-            pq.pop();
-
-            // Skip nodes that have already been processed with a shorter distance
-            if (current_distance &gt; dist[current_node]) {
-                continue;
-            }
-
-            // Explore neighbors
-            for (auto neighbor : adj[current_node]) {
-                int next_node = neighbor.first;
-                int weight = neighbor.second;
-                int distance = current_distance + weight;
-
-                // If the new distance is shorter, update it
-                if (distance &lt; dist[next_node]) {
-                    dist[next_node] = distance;
-                    pq.push({distance, next_node});
+        for (int i = 1; i &lt; n; i++) {
+            for (int u = 0; u &lt; n; u++) {
+                for (auto neighbor : adj[u]) {
+                    int v = neighbor.first;
+                    int weight = neighbor.second;
+                    if (dist[u] != INT_MAX &amp;&amp; dist[u] + weight &lt; dist[v]) {
+                        dist[v] = dist[u] + weight;
+                    }
                 }
             }
         }
+
+        for (int u = 0; u &lt; n; u++) {
+            for (auto neighbor : adj[u]) {
+                int v = neighbor.first;
+                int weight = neighbor.second;
+                if (dist[u] != INT_MAX &amp;&amp; dist[u] + weight &lt; dist[v]) {
+                    cout &lt;&lt; "Graph contains negative weight cycle\n";
+                    return dist;
+                }
+            }
+        }
+
         return dist;
     }
 };
 
 int main() {
-    // Create a graph representing dams, rivers, and floodplains
-    Graph graph(5); // 5 areas: 0 -&gt; Dam 1, 1 -&gt; Dam 2, 2 -&gt; River 1, 3 -&gt; River 2, 4 -&gt; Floodplain 1
+    Graph graph(5);
 
-    // Add edges representing water flow between the areas
-    graph.add_edge(0, 2, 10);  // Dam 1 to River 1
-    graph.add_edge(0, 1, 5);   // Dam 1 to Dam 2
-    graph.add_edge(2, 3, 7);   // River 1 to River 2
-    graph.add_edge(1, 3, 3);   // Dam 2 to River 2
-    graph.add_edge(3, 4, 2);   // River 2 to Floodplain 1
+    graph.add_edge(0, 2, 10);  
+    graph.add_edge(0, 1, 5);   
+    graph.add_edge(2, 3, 7);   
+    graph.add_edge(1, 3, 3);   
+    graph.add_edge(3, 4, 2);   
 
-    // Run Dijkstra's Algorithm from 'Dam 1' (index 0) to find the minimum cost path
-    vector&lt;int&gt; distances = graph.dijkstra(0, 5);
+    vector&lt;int&gt; distances = graph.bellmanFord(0, 5);
 
-    // Print out the minimum cost for each area
     cout &lt;&lt; "Minimum cost for each area from 'Dam 1':\n";
     for (int i = 0; i &lt; distances.size(); i++) {
         cout &lt;&lt; "Area " &lt;&lt; i &lt;&lt; ": " &lt;&lt; distances[i] &lt;&lt; endl;
@@ -140,7 +131,7 @@ int main() {
         </div>
 
         <h2>Explanation of the Code</h2>
-        <p>The C++ code implements a graph where each node represents a dam, river, or floodplain. Each edge represents the cost (or risk) of transferring water from one node to another. Dijkstra's algorithm is used to compute the minimum cost of water flow from the starting point (Dam 1) to all other nodes, ensuring efficient water management.</p>
+        <p>The C++ code implements a graph where each node represents a dam, river, or floodplain. Each edge represents the cost (or risk) of transferring water from one node to another. Bellman-Ford's algorithm is used to compute the minimum cost of water flow from the starting point (Dam 1) to all other nodes, ensuring efficient water management.</p>
 
         <h2>Example Output</h2>
         <p>When the algorithm is executed, the minimum cost to reach each area from Dam 1 is computed. Here’s an example of the output:</p>
@@ -157,10 +148,9 @@ Area 4: 10
         </div>
 
         <h2>Conclusion</h2>
-        <p>By applying Dijkstra’s algorithm, we can optimize the management of water resources, ensuring that water flows are managed in a way that minimizes flood risks while maximizing water supply and ensuring climate resilience. This solution directly supports the reduction of disaster-related impacts in line with Target 11.5.1 of the Sustainable Development Goals.</p>
+        <p>By applying Bellman-Ford’s algorithm, we can optimize the management of water resources, ensuring that water flows are managed in a way that minimizes flood risks while maximizing water supply and ensuring climate resilience. This solution directly supports the reduction of disaster-related impacts in line with Target 11.5.1 of the Sustainable Development Goals.</p>
 
         <footer>
-            <p>Created with ❤️ for Sustainable Development | GitHub Page</p>
         </footer>
     </div>
 
