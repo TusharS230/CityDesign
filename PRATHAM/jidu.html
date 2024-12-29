@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijkstra's Algorithm for Petrol Pumps</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #eaf4fc);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2.5rem;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+            overflow-x: auto;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        a {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dijkstra's Algorithm for Petrol Pumps</h1>
+        
+        <h2>C++ Code Implementation</h2>
+        <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+
+using namespace std;
+
+typedef pair&lt;int, int&gt; pii; // {distance, node}
+
+vector&lt;int&gt; dijkstra(int V, vector&lt;vector&lt;pii&gt;&gt;&amp; adj, int start) {
+    vector&lt;int&gt; dist(V, INT_MAX);
+    dist[start] = 0;
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+    pq.push({0, start});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+
+        if (d &gt; dist[u]) continue;
+
+        for (auto&amp; edge : adj[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+            if (dist[u] + weight &lt; dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+    return dist;
+}
+
+int main() {
+    int V = 5; // Number of petrol pumps
+    vector&lt;vector&lt;pii&gt;&gt; adj(V);
+
+    adj[0].push_back({1, 10});
+    adj[1].push_back({0, 10});
+    adj[1].push_back({2, 15});
+    adj[2].push_back({1, 15});
+    adj[2].push_back({3, 20});
+    adj[3].push_back({2, 20});
+    adj[3].push_back({4, 25});
+    adj[4].push_back({3, 25});
+    adj[0].push_back({4, 50});
+    adj[4].push_back({0, 50});
+
+    vector&lt;int&gt; dist = dijkstra(V, adj, 0); // Start from pump 0
+
+    cout &lt;&lt; "Minimum distance from pump 0 to other pumps: &lt;&lt; endl;
+    for (int i = 0; i &lt; V; ++i) {
+        cout &lt;&lt; "Pump 0 to Pump " &lt;&lt; i &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; endl;
+    }
+
+    return 0;
+}
+        </pre>
+
+        <h2>Explanation of the Code</h2>
+        <p>The C++ code implements Dijkstra's algorithm to find the shortest distance between petrol pumps in a graph. The graph is represented as an adjacency list, where each edge has a weight representing the distance between two petrol pumps.</p>
+        
+        <p>The algorithm starts at pump 0 and calculates the minimum distance to each of the other pumps. It uses a priority queue to efficiently pick the next pump with the shortest distance for exploration.</p>
+
+        <h2>Output</h2>
+        <p>The output of the program displays the minimum distance from pump 0 to all other pumps:</p>
+        <pre>
+Minimum distance from pump 0 to other pumps: 
+Pump 0 to Pump 0: 0
+Pump 0 to Pump 1: 10
+Pump 0 to Pump 2: 15
+Pump 0 to Pump 3: 30
+Pump 0 to Pump 4: 50
+        </pre>
+
+        <a href="index.html">Back to Main Page</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Dijkstra's Algorithm for Petrol Pumps. All rights reserved.
+    </div>
+</body>
+</html>
 
