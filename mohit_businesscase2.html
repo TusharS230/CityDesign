@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Target 11.5.1: Reduce Disaster-Related Impacts, Including Water Management</title>
+    <title>SDG Target 11.5.1: Disaster Risk Reduction through Dams and Water Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
     <style>
         body {
@@ -32,30 +32,88 @@
             text-align: center;
             margin-top: 40px;
         }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .graph-container {
+            margin-top: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Target 11.5.1: Reduce Disaster-Related Impacts, Including Water Management</h1>
-        <p><strong>Explanation:</strong> Dams play a crucial role in managing water resources, providing flood control, ensuring water supply for agriculture, drinking, and industry, and increasing climate resilience. In this solution, we will model the water management problem using a graph and apply Bellman-Ford's algorithm to optimize water flow between dams, rivers, and floodplains to reduce disaster risks.</p>
+        <h1>SDG Target 11.5.1: Reduce Disaster-Related Impacts, Including Water Management</h1>
+        <p><strong>Explanation:</strong> Dams are critical for flood control, water supply, and climate resilience. The goal is to reduce disaster risks and optimize water flow through proper water management. In this solution, we model the water management network using a graph and apply Bellman-Ford’s algorithm to find optimal water flow paths between dams, rivers, and floodplains.</p>
 
         <h2>Problem Description</h2>
-        <p>We can represent the problem of water management as a graph where each node represents a dam, river, or floodplain. The edges between the nodes represent the flow of water, with each edge having a weight that signifies the cost or difficulty of transferring water (e.g., time, risk, or energy).</p>
-        
-        <p>By applying <strong>Bellman-Ford's Algorithm</strong>, we can compute the minimum cost paths for water flow between these areas, ensuring that we reduce flood risks and optimize water distribution for climate resilience.</p>
+        <p>This problem can be modeled using a graph where nodes represent dams, rivers, and floodplains. The edges represent water flow, with associated costs (e.g., flood risk, water transfer cost). Bellman-Ford’s algorithm can then be used to compute the minimum cost of water flow, ensuring disaster risk reduction and efficient water management.</p>
 
-        <h2>Solution Approach</h2>
-        <p>We model the problem as a graph where:</p>
-        <ul>
-            <li>Nodes represent dams, rivers, and floodplains.</li>
-            <li>Edges represent the flow of water between these nodes, with associated costs (e.g., flood risk, water transfer cost, etc.).</li>
-        </ul>
+        <h2>City Design (1500 km²)</h2>
+        <p>The city design consists of a total area of 1500 square kilometers. For water management, we will model key dams, rivers, and floodplains that interact in a connected network.</p>
         
-        <p>The objective is to use Bellman-Ford’s algorithm to find the optimal water flow paths, minimizing the risks associated with flood control and maximizing water availability.</p>
+        <h3>Key Dams and Water Management Components</h3>
+        <p>Below is a table representing key components of the city's water management system:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Location (Latitude, Longitude)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dam 1</td>
+                    <td>Dam</td>
+                    <td>Main water source for flood control</td>
+                    <td>12.345, 67.890</td>
+                </tr>
+                <tr>
+                    <td>Dam 2</td>
+                    <td>Dam</td>
+                    <td>Water storage for agriculture</td>
+                    <td>12.100, 67.800</td>
+                </tr>
+                <tr>
+                    <td>River A</td>
+                    <td>River</td>
+                    <td>Primary water flow path connecting Dam 1 to Dam 2</td>
+                    <td>12.150, 67.850</td>
+                </tr>
+                <tr>
+                    <td>Floodplain X</td>
+                    <td>Floodplain</td>
+                    <td>Flood control and water absorption area</td>
+                    <td>12.200, 67.900</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Graph Representation of Water Management</h2>
+        <p>Below is a simplified graph of the water management system, where each node represents a dam, river, or floodplain, and the edges represent water flow.</p>
+
+        <div class="graph-container">
+            <canvas id="waterManagementGraph" width="400" height="400"></canvas>
+        </div>
 
         <h2>C++ Code Implementation</h2>
-        <p>The following C++ code demonstrates how we can model the water management problem using a graph and apply Bellman-Ford's algorithm to optimize water flow between dams, rivers, and floodplains:</p>
+        <p>The following C++ code implements the water management network using Bellman-Ford's algorithm:</p>
 
         <div class="code-block">
             <pre>
@@ -131,10 +189,10 @@ int main() {
         </div>
 
         <h2>Explanation of the Code</h2>
-        <p>The C++ code implements a graph where each node represents a dam, river, or floodplain. Each edge represents the cost (or risk) of transferring water from one node to another. Bellman-Ford's algorithm is used to compute the minimum cost of water flow from the starting point (Dam 1) to all other nodes, ensuring efficient water management.</p>
+        <p>The C++ code models the water management system where nodes represent dams, rivers, and floodplains. Bellman-Ford’s algorithm calculates the minimum cost for water flow between these components. The graph helps optimize water distribution and minimize risks in disaster-prone areas.</p>
 
         <h2>Example Output</h2>
-        <p>When the algorithm is executed, the minimum cost to reach each area from Dam 1 is computed. Here’s an example of the output:</p>
+        <p>The following output shows the minimum cost paths for water flow:</p>
 
         <div class="code-block">
             <pre>
@@ -148,12 +206,34 @@ Area 4: 10
         </div>
 
         <h2>Conclusion</h2>
-        <p>By applying Bellman-Ford’s algorithm, we can optimize the management of water resources, ensuring that water flows are managed in a way that minimizes flood risks while maximizing water supply and ensuring climate resilience. This solution directly supports the reduction of disaster-related impacts in line with Target 11.5.1 of the Sustainable Development Goals.</p>
+        <p>By applying Bellman-Ford’s algorithm, we can ensure efficient water management, reduce flood risks, and optimize water flow to enhance climate resilience in the city. This solution supports the SDG Target 11.5.1 to reduce disaster-related impacts through improved water management systems.</p>
 
         <footer>
         </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('waterManagementGraph').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'network',
+            data: {
+                nodes: [
+                    { id: 0, label: 'Dam 1' },
+                    { id: 1, label: 'Dam 2' },
+                    { id: 2, label: 'River A' },
+                    { id: 3, label: 'Floodplain X' }
+                ],
+                edges: [
+                    { from: 0, to: 1, label: 'Flow 10' },
+                    { from: 0, to: 2, label: 'Flow 5' },
+                    { from: 2, to: 3, label: 'Flow 3' },
+                    { from: 1, to: 3, label: 'Flow 7' }
+                ]
+            },
+            options: {}
+        });
+    </script>
 </body>
 </html>
