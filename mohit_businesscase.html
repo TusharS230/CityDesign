@@ -373,8 +373,39 @@ int main() {
             </pre>
         </div>
 
+        <h3>C++ Code Implementation - Bubble Sort</h3>
+        <div class="code-block">
+            <pre>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void bubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    vector<int> arr = {64, 34, 25, 12, 22, 11, 90};
+    bubbleSort(arr);
+    cout << "Sorted array: ";
+    for (int i = 0; i < arr.size(); i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
+            </pre>
+        </div>
+
         <h2>Conclusion</h2>
-        <p>By applying Dijkstra's algorithm, Prim's algorithm, DFS, and the Boyer-Moore algorithm, we can optimize land use for sustainable agriculture and urban-rural integration. This ensures that urban growth accommodates rural development while considering the environmental impact and costs.</p>
+        <p>By applying Dijkstra's algorithm, Prim's algorithm, DFS, Boyer-Moore algorithm, and Bubble Sort, we can optimize land use for sustainable agriculture and urban-rural integration. This ensures that urban growth accommodates rural development while considering the environmental impact and costs.</p>
 
         <footer>
         </footer>
