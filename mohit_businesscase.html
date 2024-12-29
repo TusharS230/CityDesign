@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Land Use: Urban-Rural Integration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            border-left: 5px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        h2 {
+            color: #007bff;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sustainable Land Use for Urban-Rural Integration</h1>
+        <p><strong>Target 11.3.1</strong>: Ensuring sustainable land use for urban-rural integration is crucial for balancing urban growth with rural development. This goal aims to promote sustainable food production and rural development while accommodating urban expansion. This page explains how we can model the problem and solve it using Dijkstra's algorithm.</p>
+
+        <h2>Solution Approach</h2>
+        <p>The problem of sustainable land use can be modeled as a graph problem, where both urban and rural areas are nodes. The edges represent possible transitions or connections between these areas, which can have costs such as environmental impact, infrastructure requirements, or the cost of land conversion.</p>
+
+        <p>We will apply <strong>Dijkstra's Algorithm</strong> to find the optimal paths for land use, minimizing various costs while considering sustainability in urban-rural integration.</p>
+
+        <h2>Graph Representation</h2>
+        <p>The approach involves creating a graph where:</p>
+        <ul>
+            <li>Nodes represent land areas (both urban and rural).</li>
+            <li>Edges represent transitions between these areas, with each edge having a weight that signifies the cost of land use change (e.g., environmental impact, infrastructure development cost).</li>
+        </ul>
+
+        <h2>Dijkstra's Algorithm for Optimization</h2>
+        <p>We can use Dijkstra’s algorithm to compute the minimum cost paths from one area (e.g., an urban area) to all other areas. The algorithm helps us identify the most efficient land-use transitions that balance development and sustainability.</p>
+
+        <h3>Python Code Implementation</h3>
+        <p>The following Python code demonstrates how we can implement the graph and Dijkstra’s algorithm to solve this problem:</p>
+
+        <div class="code-block">
+            <pre>
+import heapq
+
+# Graph representation: each area is a node, edges represent possible transitions
+class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_node(self, node):
+        if node not in self.graph:
+            self.graph[node] = []
+
+    def add_edge(self, from_node, to_node, cost):
+        self.graph[from_node].append((to_node, cost))
+        self.graph[to_node].append((from_node, cost))
+
+    def dijkstra(self, start):
+        # Priority queue to store nodes with the current shortest distance
+        queue = [(0, start)]
+        distances = {node: float('inf') for node in self.graph}
+        distances[start] = 0
+        while queue:
+            current_distance, current_node = heapq.heappop(queue)
+
+            # Skip nodes that have already been processed with a shorter distance
+            if current_distance > distances[current_node]:
+                continue
+
+            # Explore neighbors
+            for neighbor, weight in self.graph[current_node]:
+                distance = current_distance + weight
+
+                # If the new distance is shorter, update it
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    heapq.heappush(queue, (distance, neighbor))
+
+        return distances
+
+# Example usage: Create a graph with urban and rural areas
+graph = Graph()
+
+# Add nodes (areas)
+graph.add_node('Urban Area 1')
+graph.add_node('Urban Area 2')
+graph.add_node('Rural Area 1')
+graph.add_node('Rural Area 2')
+
+# Add edges (land transitions between areas)
+graph.add_edge('Urban Area 1', 'Rural Area 1', 10)  # Cost to convert or integrate land
+graph.add_edge('Urban Area 1', 'Urban Area 2', 5)   # Cost for urban expansion
+graph.add_edge('Rural Area 1', 'Rural Area 2', 2)   # Cost for agricultural development
+graph.add_edge('Urban Area 2', 'Rural Area 2', 7)   # Mixed transition cost
+
+# Run Dijkstra's Algorithm from 'Urban Area 1'
+distances = graph.dijkstra('Urban Area 1')
+
+# Print out the minimum cost for each area
+print("Minimum cost for each area from 'Urban Area 1':")
+for area, cost in distances.items():
+    print(f"{area}: {cost}")
+            </pre>
+        </div>
+
+        <h2>Explanation of the Code</h2>
+        <p>The code implements a graph where each node represents an area (urban or rural), and each edge between the nodes represents the cost of transitioning between land uses. Dijkstra's algorithm is used to find the minimum cost to reach each area starting from a specific urban area.</p>
+
+        <h2>Example Output</h2>
+        <p>When running the algorithm, the minimum cost to reach each area from 'Urban Area 1' is computed. Below is an example of the output:</p>
+
+        <div class="code-block">
+            <pre>
+Minimum cost for each area from 'Urban Area 1':
+Urban Area 1: 0
+Urban Area 2: 5
+Rural Area 1: 10
+Rural Area 2: 12
+            </pre>
+        </div>
+
+        <h2>Conclusion</h2>
+        <p>By applying Dijkstra's algorithm, we can optimize land use for urban-rural integration. This ensures that urban expansion does not come at the cost of rural development, promoting sustainable land use in line with Target 11.3.1 of the Sustainable Development Goals.</p>
+
+        <footer>
+            <p>Created with ❤️ for Sustainable Development | GitHub Page</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
