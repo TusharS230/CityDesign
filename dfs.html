@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ DFS Graph Traversal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        pre {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 16px;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>C++ DFS Graph Traversal</h1>
+        <p>This webpage showcases the implementation of Depth-First Search (DFS) for graph traversal in C++. Below is the code:</p>
+        
+        <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class Graph {
+public:
+    int vertices;
+    vector&lt;vector&lt;int&gt;&gt; adjList;
+
+    Graph(int v) {
+        vertices = v;
+        adjList.resize(v);
+    }
+
+    // Add an edge to the graph (undirected)
+    void addEdge(int u, int v) {
+        adjList[u].push_back(v);
+        adjList[v].push_back(u);
+    }
+
+    // Recursive DFS function
+    void DFS(int node, vector&lt;bool&gt;&amp; visited) {
+        // Mark the node as visited and print it
+        visited[node] = true;
+        cout &lt;&lt; node &lt;&lt; " ";
+
+        // Visit all unvisited neighbors of the node
+        for (int neighbor : adjList[node]) {
+            if (!visited[neighbor]) {
+                DFS(neighbor, visited);
+            }
+        }
+    }
+
+    // Function to call DFS from a given start node
+    void DFSTraversal(int start) {
+        vector&lt;bool&gt; visited(vertices, false);
+        DFS(start, visited);
+    }
+};
+
+int main() {
+    Graph g(6); // Create a graph with 6 nodes (0 to 5)
+
+    // Adding edges to the graph
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 3);
+    g.addEdge(1, 4);
+    g.addEdge(2, 5);
+
+    cout &lt;&lt; "DFS traversal starting from node 0: ";
+    g.DFSTraversal(0);
+
+    return 0;
+}</code></pre>
+    </div>
+
+</body>
+</html>
