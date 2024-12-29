@@ -275,8 +275,55 @@ int main() {
             </pre>
         </div>
 
+        <h3>C++ Code Implementation - Depth First Search (DFS)</h3>
+        <div class="code-block">
+            <pre>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Graph {
+public:
+    vector<vector<int>> adj;
+
+    Graph(int n) {
+        adj.resize(n);
+    }
+
+    void add_edge(int from, int to) {
+        adj[from].push_back(to);
+        adj[to].push_back(from);  // For undirected graph
+    }
+
+    void dfs(int node, vector<bool>& visited) {
+        cout << "Visiting node " << node << endl;
+        visited[node] = true;
+        for (int neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, visited);
+            }
+        }
+    }
+};
+
+int main() {
+    Graph graph(4);  // 4 nodes
+    graph.add_edge(0, 1);
+    graph.add_edge(0, 2);
+    graph.add_edge(1, 2);
+    graph.add_edge(2, 3);
+
+    vector<bool> visited(4, false);
+    cout << "Depth First Search starting from node 0:\n";
+    graph.dfs(0, visited);
+
+    return 0;
+}
+            </pre>
+        </div>
+
         <h2>Conclusion</h2>
-        <p>By applying Dijkstra's algorithm and Prim's algorithm, we can optimize land use for sustainable agriculture and urban-rural integration. This ensures that urban growth accommodates rural development while considering the environmental impact and costs.</p>
+        <p>By applying Dijkstra's algorithm, Prim's algorithm, and DFS, we can optimize land use for sustainable agriculture and urban-rural integration. This ensures that urban growth accommodates rural development while considering the environmental impact and costs.</p>
 
         <footer>
         </footer>
