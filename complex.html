@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ BFS Code</title>
+    <!-- Include Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <h1>C++ BFS Algorithm Code</h1>
+    <pre><code class="cpp">
+#include <iostream>
+#include <queue>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
+
+void bfs(const vector<vector<int>>& graph, int start) {
+    queue<int> q;
+    unordered_set<int> visited;
+    visited.insert(start);
+    q.push(start);
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout << "Visiting store " << node << endl;
+
+        for (int neighbor : graph[node]) {
+            if (visited.find(neighbor) == visited.end()) {
+                visited.insert(neighbor);
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+int main() {
+    vector<vector<int>> graph = {
+        {1, 2}, // Store 0 is connected to 1, 2
+        {0, 3}, // Store 1 is connected to 0, 3
+        {0, 3}, // Store 2 is connected to 0, 3
+        {1, 2}  // Store 3 is connected to 1, 2
+    };
+
+    bfs(graph, 0); // Start BFS from store 0 (entrance)
+
+    return 0;
+}
+    </code></pre>
+</body>
+</html>
 
