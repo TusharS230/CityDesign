@@ -53,60 +53,50 @@
 #include &lt;climits&gt;
 using namespace std;
 
-// Create a graph structure (adjacency list)
 class Graph {
 public:
-    int V, E; // Number of vertices and edges
-    vector&lt;pair&lt;int, pair&lt;int, int&gt;&gt;&gt; edges; // adjacency list (edges represented as (u, v, weight))
-    
+    int V, E;
+    vector&lt;pair&lt;int, pair&lt;int, int&gt;&gt;&gt; edges;
+
     Graph(int V, int E);
     void addEdge(int u, int v, int weight);
     void bellmanFord(int source);
 };
 
-// Constructor to initialize graph with V vertices and E edges
 Graph::Graph(int V, int E) {
     this-&gt;V = V;
     this-&gt;E = E;
 }
 
-// Add an edge between vertices u and v with a given weight
 void Graph::addEdge(int u, int v, int weight) {
-    edges.push_back(make_pair(u, make_pair(v, weight))); // edge from u to v with weight
+    edges.push_back(make_pair(u, make_pair(v, weight)));
 }
 
-// Implement Bellman-Ford algorithm to find the shortest paths from the source
 void Graph::bellmanFord(int source) {
-    vector&lt;int&gt; dist(V, INT_MAX); // distance array to hold the shortest distance from source
-    dist[source] = 0; // distance to itself is 0
-    
-    // Relax all edges V-1 times
+    vector&lt;int&gt; dist(V, INT_MAX);
+    dist[source] = 0;
+
     for (int i = 1; i &lt; V; i++) {
         for (auto edge : edges) {
             int u = edge.first;
             int v = edge.second.first;
             int weight = edge.second.second;
-            
-            // Relaxation step: if a shorter path is found, update distance
             if (dist[u] != INT_MAX &amp;&amp; dist[u] + weight &lt; dist[v]) {
                 dist[v] = dist[u] + weight;
             }
         }
     }
-    
-    // Check for negative weight cycles
+
     for (auto edge : edges) {
         int u = edge.first;
         int v = edge.second.first;
         int weight = edge.second.second;
-        
         if (dist[u] != INT_MAX &amp;&amp; dist[u] + weight &lt; dist[v]) {
             cout &lt;&lt; "Graph contains negative weight cycle\n";
             return;
         }
     }
-    
-    // Output the shortest distances from source
+
     cout &lt;&lt; "Shortest distances from source " &lt;&lt; source &lt;&lt; ":\n";
     for (int i = 0; i &lt; V; i++) {
         if (dist[i] == INT_MAX) {
@@ -118,23 +108,20 @@ void Graph::bellmanFord(int source) {
 }
 
 int main() {
-    // Create a graph (example with 6 vertices, representing different locations)
-    Graph g(6, 9); // 6 vertices, 9 edges
-    
-    // Add edges between locations (nodes) with distances (weights)
-    g.addEdge(0, 1, 4); // edge between node 0 and node 1 with weight 4
-    g.addEdge(0, 2, 1); // edge between node 0 and node 2 with weight 1
-    g.addEdge(2, 1, 2); // edge between node 2 and node 1 with weight 2
-    g.addEdge(1, 3, 5); // edge between node 1 and node 3 with weight 5
-    g.addEdge(2, 3, 8); // edge between node 2 and node 3 with weight 8
-    g.addEdge(3, 4, 3); // edge between node 3 and node 4 with weight 3
-    g.addEdge(4, 5, 6); // edge between node 4 and node 5 with weight 6
-    g.addEdge(5, 3, 2); // edge between node 5 and node 3 with weight 2
-    g.addEdge(3, 5, 7); // edge between node 3 and node 5 with weight 7
-    
-    // Run Bellman-Ford algorithm from node 0 (e.g., from a housing area or a residential area)
+    Graph g(6, 9);
+
+    g.addEdge(0, 1, 4);
+    g.addEdge(0, 2, 1);
+    g.addEdge(2, 1, 2);
+    g.addEdge(1, 3, 5);
+    g.addEdge(2, 3, 8);
+    g.addEdge(3, 4, 3);
+    g.addEdge(4, 5, 6);
+    g.addEdge(5, 3, 2);
+    g.addEdge(3, 5, 7);
+
     g.bellmanFord(0);
-    
+
     return 0;
 }
 </code>
