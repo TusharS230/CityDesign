@@ -1,1 +1,37 @@
+#include <iostream>
+#include <vector>
 
+using namespace std;
+
+void warshall(vector<vector<int>>& reach) {
+    int V = reach.size();
+    for (int k = 0; k < V; ++k) {
+        for (int i = 0; i < V; ++i) {
+            for (int j = 0; j < V; ++j) {
+                reach[i][j] = reach[i][j] || (reach[i][k] && reach[k][j]);
+            }
+        }
+    }
+}
+
+int main() {
+    int V = 4; // Number of stores
+    vector<vector<int>> reach = {
+        {0, 1, 1, 0},
+        {1, 0, 1, 0},
+        {1, 1, 0, 1},
+        {0, 0, 1, 0}
+    };
+
+    warshall(reach);
+
+    cout << "Transitive Closure (Accessible Stores):\n";
+    for (int i = 0; i < V; ++i) {
+        for (int j = 0; j < V; ++j) {
+            cout << reach[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
