@@ -1,109 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prim's Algorithm for Minimum Spanning Tree</title>
-  <style>
-    /* General Styles */
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Designing - Prim's Algorithm for Minimum Spanning Tree</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Header Styles */
-    header {
-      background-color: #f0f0f0;
-      padding: 20px;
-      text-align: center;
-    }
+        /* Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #eaf4fc, #f9fafe);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-    h1 {
-      margin-bottom: 10px;
-    }
+        /* Container Styling */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
 
-    /* Main Content Styles */
-    main {
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
 
-    section {
-      margin-bottom: 20px;
-    }
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
 
-    h2 {
-      margin-bottom: 10px;
-    }
+        .header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
 
-    pre {
-      background-color: #eee;
-      padding: 10px;
-      border-radius: 4px;
-    }
+        /* Section Styling */
+        section {
+            padding: 20px;
+        }
 
-    /* Code Styles */
-    code {
-      font-family: monospace;
-      background-color: #fafafa;
-      padding: 2px;
-      border-radius: 2px;
-    }
-  </style>
+        h2 {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        p, ul li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 25px;
+            list-style: disc;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        /* Highlight Section */
+        .highlight {
+            background: #f1faff;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* Code Styling */
+        pre {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+
+        code {
+            color: #d63384;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #f1f1f1;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            p, ul li {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Prim's Algorithm for Minimum Spanning Tree</h1>
-  </header>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>City Designing: Prim's Algorithm for Minimum Spanning Tree</h1>
+            <p>Building efficient infrastructure through optimized networks</p>
+        </div>
 
-  <main>
-    <section>
-      <h2>Prim's Algorithm Description</h2>
-      <p>Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted connected graph. A minimum spanning tree is a subset of the edges that connects all the vertices in the graph with the least possible total edge weight.</p>
-      <pre>
-        ALGORITHM Prim(G)
-        // Prim’s algorithm to construct a minimum spanning tree
-        // Input: A weighted connected graph G(V, E)
-        // Output: ET, the set of edges composing the MST of G
-        VT ← {v₀}
-        ET ← Ø
-        for i ← 1 to |V| - 1 do
-          find a minimum weight edge e* = (v*, u*) along all the edges (v, u) such that
-          v is in VT and u is in V – VT
-          VT ← VT ∪ {u*}
-          ET ← ET ∪ {e*}
-        return ET
-      </pre>
-    </section>
+        <!-- Algorithm Description -->
+        <section>
+            <h2>Algorithm Description</h2>
+            <pre>
+<code>ALGORITHM Prim(G)
+// Prim’s algorithm to construct a minimum spanning tree
+// Input: A weighted connected graph G(V, E)
+// Output: ET, the set of edges composing the MST of G
 
-    <section>
-      <h2>Time Complexity of Prim's Algorithm</h2>
-      <p>The time complexity of Prim's algorithm depends on the data structure used to represent the graph and implement the priority queue.</p>
-      <table style="width: 100%">
-        <tr>
-          <th>Data Structure</th>
-          <th>Time Complexity</th>
-          <th>Explanation</th>
-        </tr>
-        <tr>
-          <td>Simple Array (No Priority Queue)</td>
-          <td>O(V^2)</td>
-          <td>Each selection of the minimum edge and update takes O(V) time, leading to O(V^2) for all vertices.</td>
-        </tr>
-        <tr>
-          <td>Binary Heap (Min-Heap)</td>
-          <td>O((V + E) log V)</td>
-          <td>Extracting the minimum edge and updating vertices takes O(log V) time, resulting in a more efficient algorithm, especially for sparse graphs.</td>
-        </tr>
-        <tr>
-          <td>Fibonacci Heap</td>
-          <td>O(E + V log V)</td>
-          <td>Decrease-key operations are more efficient with O(1) amortized time, and extracting the minimum edge takes O(log V), making it ideal for dense graphs.</td>
-        </tr>
-      </table>
-    </section>
-  </main>
-</body>
-</html>
+VT ← {v₀}
+ET ← Ø
+for i ← 1 to |V| - 1 do
+    find a minimum weight edge e* = (v*, u*) along all the edges (v, u) such that
+    v is in VT and u is in V – VT
+    VT ← VT ∪ {u*}
+    ET ← ET ∪ {e*}
+return ET</code>
+            </pre>
+        </section>
+
+        <!-- C++ Code Implementation -->
+        <section>
+            <h2>C++ Code Implementation</h2>
+            <pre>
+<code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+struct Edge {
+    int dest, weight;
+};
+
+struct Node {
+    int vertex, key;
+    bool operator&gt;(const Node &other) const {
+        return key &gt; other.key;
+    }
+};
+
+class Graph {
+public:
+    Graph(int vertices) {
+        V = vertices;
+        
