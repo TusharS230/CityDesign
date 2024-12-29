@@ -89,6 +89,41 @@
             margin: 20px 0;
         }
 
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Graph Styling */
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        svg {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #f9f9f9;
+        }
+
         /* Footer Styling */
         .footer {
             text-align: center;
@@ -154,6 +189,84 @@
             <h3>5. Floyd-Warshall Algorithm</h3>
             <p><strong>Application:</strong> The Floyd-Warshall algorithm is a dynamic programming algorithm used to find the shortest paths between all pairs of nodes in a graph. In the context of sewage treatment, it can be used to analyze the entire system’s flow network, ensuring that all points of wastewater treatment are optimally connected.</p>
 
+        </section>
+
+        <!-- Table of Sewage Treatment Stages -->
+        <section>
+            <h2>Sewage Treatment Stages</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Process</th>
+                        <th>Duration (Hours)</th>
+                        <th>Key Algorithm Used</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primary Treatment</td>
+                        <td>Removal of large particles and debris from sewage.</td>
+                        <td>2</td>
+                        <td>DFS</td>
+                    </tr>
+                    <tr>
+                        <td>Secondary Treatment</td>
+                        <td>Biological treatment to remove dissolved and suspended organic matter.</td>
+                        <td>4</td>
+                        <td>Dijkstra's Algorithm</td>
+                    </tr>
+                    <tr>
+                        <td>Tertiary Treatment</td>
+                        <td>Advanced filtration to remove remaining contaminants.</td>
+                        <td>3</td>
+                        <td>Floyd-Warshall</td>
+                    </tr>
+                    <tr>
+                        <td>Disinfection</td>
+                        <td>Chlorination or UV treatment to kill pathogens.</td>
+                        <td>1</td>
+                        <td>Quick Sort</td>
+                    </tr>
+                    <tr>
+                        <td>Final Disposal</td>
+                        <td>Disposal of treated water back to the environment or for reuse.</td>
+                        <td>1</td>
+                        <td>Merge Sort</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Graph Section -->
+        <section>
+            <h2>Network of Sewage Treatment Stages</h2>
+            <div class="graph-container">
+                <svg width="500" height="400">
+                    <!-- Nodes representing stages -->
+                    <circle cx="250" cy="50" r="30" fill="#28a745" />
+                    <text x="240" y="55" fill="#fff" font-size="12" font-family="Arial">Primary</text>
+
+                    <circle cx="150" cy="150" r="30" fill="#007bff" />
+                    <text x="135" y="155" fill="#fff" font-size="12" font-family="Arial">Secondary</text>
+
+                    <circle cx="350" cy="150" r="30" fill="#ffc107" />
+                    <text x="335" y="155" fill="#fff" font-size="12" font-family="Arial">Tertiary</text>
+
+                    <circle cx="250" cy="300" r="30" fill="#6c757d" />
+                    <text x="225" y="305" fill="#fff" font-size="12" font-family="Arial">Disinfection</text>
+
+                    <circle cx="150" cy="350" r="30" fill="#17a2b8" />
+                    <text x="135" y="355" fill="#fff" font-size="12" font-family="Arial">Final Disposal</text>
+
+                    <!-- Edges representing process flow -->
+                    <line x1="250" y1="50" x2="150" y2="150" stroke="#333" stroke-width="2" />
+                    <line x1="250" y1="50" x2="350" y2="150" stroke="#333" stroke-width="2" />
+                    <line x1="150" y1="150" x2="250" y2="300" stroke="#333" stroke-width="2" />
+                    <line x1="350" y1="150" x2="250" y2="300" stroke="#333" stroke-width="2" />
+                    <line x1="250" y1="300" x2="150" y2="350" stroke="#333" stroke-width="2" />
+                </svg>
+            </div>
         </section>
 
         <!-- Footer -->
