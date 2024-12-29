@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #eaf4fc, #f9fafe);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        p, ul li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 25px;
+            list-style: disc;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        /* Highlight Section */
+        .highlight {
+            background: #f1faff;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* Code Styling */
+        pre {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+
+        code {
+            color: #d63384;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #f1f1f1;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            p, ul li {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Quick Sort Algorithm</h1>
+            <p>Understanding the Quick Sort algorithm for efficient sorting</p>
+        </div>
+
+        <!-- Algorithm Description -->
+        <section>
+            <h2>Algorithm Description</h2>
+            <p>Quick Sort is a divide-and-conquer algorithm. The key idea is to pick a pivot element and partition the array into two sub-arrays according to whether they are less than or greater than the pivot.</p>
+            <pre><code>ALGORITHM QuickSort(arr, low, high)
+// Input: Array arr[] with indices from low to high
+// Output: Sorted array
+
+if low < high then
+    pivotIndex ← partition(arr, low, high) // Partition the array around the pivot
+    QuickSort(arr, low, pivotIndex - 1)   // Recursively sort the left sub-array
+    QuickSort(arr, pivotIndex + 1, high)  // Recursively sort the right sub-array
+end if</code></pre>
+        </section>
+
+        <!-- C++ Code Implementation -->
+        <section>
+            <h2>C++ Code Implementation</h2>
+            <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Function to partition the array
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high]; // Choosing the last element as pivot
+    int i = low - 1; // Index of smaller element
+    
+    // Rearranging the elements around the pivot
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] &lt; pivot) {
+            i++; // Increment the smaller element index
+            swap(arr[i], arr[j]); // Swap the elements
+        }
+    }
+    
+    // Swap the pivot element to the correct position
+    swap(arr[i + 1], arr[high]);
+    
+    return (i + 1); // Return the pivot index
+}
+
+// Function to implement quick sort
+void quickSort(int arr[], int low, int high) {
+    if (low &lt; high) {
+        // Partitioning the array
+        int pi = partition(arr, low, high);
+        
+        // Recursively sort the sub-arrays
+        quickSort(arr, low, pi - 1); // Sort left sub-array
+        quickSort(arr, pi + 1, high); // Sort right sub-array
+    }
+}
+
+// Function to print the array
+void printArray(int arr[], int size) {
+    for (int i = 0; i &lt; size; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    int arr[] = {10, 80, 30, 90, 40, 50, 70};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    cout &lt;&lt; "Original Array: ";
+    printArray(arr, n);
+    
+    quickSort(arr, 0, n - 1); // Calling quick sort
+    
+    cout &lt;&lt; "Sorted Array: ";
+    printArray(arr, n);
+    
+    return 0;
+}</code></pre>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2024 Quick Sort Algorithm Tutorial. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
