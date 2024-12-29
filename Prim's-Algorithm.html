@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prim's Algorithm for Minimum Spanning Tree</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #f0f0f0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    /* Main Content Styles */
+    main {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    /* Code Styles */
+    code {
+      font-family: monospace;
+      background-color: #fafafa;
+      padding: 2px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prim's Algorithm for Minimum Spanning Tree</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Prim's Algorithm Description</h2>
+      <p>Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted connected graph. A minimum spanning tree is a subset of the edges that connects all the vertices in the graph with the least possible total edge weight.</p>
+      <pre>
+        ALGORITHM Prim(G)
+        // Prim’s algorithm to construct a minimum spanning tree
+        // Input: A weighted connected graph G(V, E)
+        // Output: ET, the set of edges composing the MST of G
+        VT ← {v₀}
+        ET ← Ø
+        for i ← 1 to |V| - 1 do
+          find a minimum weight edge e* = (v*, u*) along all the edges (v, u) such that
+          v is in VT and u is in V – VT
+          VT ← VT ∪ {u*}
+          ET ← ET ∪ {e*}
+        return ET
+      </pre>
+    </section>
+
+    <section>
+      <h2>Time Complexity of Prim's Algorithm</h2>
+      <p>The time complexity of Prim's algorithm depends on the data structure used to represent the graph and implement the priority queue.</p>
+      <table style="width: 100%">
+        <tr>
+          <th>Data Structure</th>
+          <th>Time Complexity</th>
+          <th>Explanation</th>
+        </tr>
+        <tr>
+          <td>Simple Array (No Priority Queue)</td>
+          <td>O(V^2)</td>
+          <td>Each selection of the minimum edge and update takes O(V) time, leading to O(V^2) for all vertices.</td>
+        </tr>
+        <tr>
+          <td>Binary Heap (Min-Heap)</td>
+          <td>O((V + E) log V)</td>
+          <td>Extracting the minimum edge and updating vertices takes O(log V) time, resulting in a more efficient algorithm, especially for sparse graphs.</td>
+        </tr>
+        <tr>
+          <td>Fibonacci Heap</td>
+          <td>O(E + V log V)</td>
+          <td>Decrease-key operations are more efficient with O(1) amortized time, and extracting the minimum edge takes O(log V), making it ideal for dense graphs.</td>
+        </tr>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
