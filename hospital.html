@@ -108,14 +108,16 @@
       ],
       "links": [
         {"source": "Emergency Ward", "target": "Medical Shop", "distance": 10},
-        {"source": "Emergency Ward", "target": "Laboratory", "distance": 8},
+        {"source": "Medical Shop", "target": "Laboratory", "distance": 8},
         {"source": "Laboratory", "target": "X-ray", "distance": 5},
         {"source": "X-ray", "target": "Ward", "distance": 7},
         {"source": "Ward", "target": "ICU", "distance": 12},
         {"source": "ICU", "target": "Dialysis Unit", "distance": 6},
         {"source": "Dialysis Unit", "target": "Cath Lab", "distance": 9},
+        {"source": "Cath Lab", "target": "NICU", "distance": 8},
         {"source": "NICU", "target": "PICU", "distance": 3},
-        {"source": "PICU", "target": "OT", "distance": 4}
+        {"source": "PICU", "target": "OT", "distance": 4},
+        {"source": "OT", "target": "Emergency Ward", "distance": 10}  <!-- Closed loop -->
       ]
     };
 
@@ -195,7 +197,6 @@
         d.fx = null;
         d.fy = null;
     }
-</script>
-
+    </script>
 </body>
 </html>
