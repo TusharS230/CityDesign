@@ -1,67 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hospital Dijkstra Map</title>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid #000;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Sub-Task</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
 
-    .node {
-      fill: #66b3ff;
-      stroke: #333;
-      stroke-width: 1.5px;
-      cursor: pointer;
-    }
+        .node {
+          fill: #66b3ff;
+          stroke: #333;
+          stroke-width: 1.5px;
+          cursor: pointer;
+        }
 
-    .link {
-      stroke: #999;
-      stroke-width: 1.5px;
-      stroke-dasharray: 4, 4;
-    }
+        .link {
+          stroke: #999;
+          stroke-width: 1.5px;
+          stroke-dasharray: 4, 4;
+        }
 
-    text {
-      font-family: sans-serif;
-      font-size: 12px;
-      text-anchor: middle;
-      fill: #333;
-    }
+        text {
+          font-family: sans-serif;
+          font-size: 12px;
+          text-anchor: middle;
+          fill: #333;
+        }
 
-    .distance-label {
-      fill: #555;
-    }
-  </style>
+        .distance-label {
+          fill: #555;
+        }
+    </style>
 </head>
 <body>
-  <h2>Hospital Dijkstra Map</h2>
-  <svg width="600" height="400"></svg>
+    <h1>Sub-Task: Hospital</h1>
+    <h2>SDG Goals, Targets, and Indicators</h2>
+    <ul>
+        <li><strong>SDG Goal:</strong> 11 (Sustainable Cities and Communities)</li>
+        <li><strong>Target:</strong> 11.2 (Provide access to safe, affordable, accessible, and sustainable transport systems)</li>
+        <li><strong>Target:</strong> 11.7 (Provide universal access to safe, inclusive, and accessible green and public spaces)</li>
+        <li><strong>Indicators:</strong> 11.2.1, 11.7.1</li>
+    </ul>
+    <h2>Description</h2>
+    <p>The hospital should be located close to residential areas to ensure easy access. Contracts for the installation of medical equipment, beds, and other infrastructure must be finalized. Allocation of doctors, nurses, and support staff is essential to ensure proper care and operations.</p>
+    <h2>Hospital Sections</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Sl. No.</th>
+                <th>Section</th>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Emergency Ward</td><td>3</td></tr>
+            <tr><td>2</td><td>Medical Shop</td><td>2</td></tr>
+            <tr><td>3</td><td>Laboratory</td><td>2</td></tr>
+            <tr><td>4</td><td>X-ray</td><td>2</td></tr>
+            <tr><td>5</td><td>Pharmacy</td><td>2</td></tr>
+            <tr><td>6</td><td>OPD</td><td>6</td></tr>
+            <tr><td>7</td><td>Ward</td><td>10</td></tr>
+            <tr><td>8</td><td>ICU</td><td>2</td></tr>
+            <tr><td>9</td><td>Dialysis Unit</td><td>2</td></tr>
+            <tr><td>10</td><td>Cath Lab</td><td>1</td></tr>
+            <tr><td>11</td><td>NICU</td><td>2</td></tr>
+            <tr><td>12</td><td>PICU</td><td>2</td></tr>
+            <tr><td>13</td><td>OT (Operation Theater)</td><td>5</td></tr>
+            <tr><td>14</td><td>Blood Bank</td><td>1</td></tr>
+            <tr><td>15</td><td>Rehabilitation Center</td><td>1</td></tr>
+            <tr><td>16</td><td>Physiotherapy</td><td>2</td></tr>
+            <tr><td>17</td><td>Dental Clinic</td><td>2</td></tr>
+            <tr><td>18</td><td>Eye Clinic</td><td>2</td></tr>
+            <tr><td>19</td><td>Dermatology Clinic</td><td>1</td></tr>
+            <tr><td>20</td><td>Psychiatry Clinic</td><td>1</td></tr>
+        </tbody>
+    </table>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script>
+    <h2>Hospital Dijkstra Map</h2>
+    <svg width="800" height="600"></svg>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
     var graph = {
       "nodes": [
-        {"id": "Emergency Ward", "label": "Emergency"},
-        {"id": "Medical Shop", "label": "Med Shop"},
-        {"id": "Laboratory", "label": "Lab"},
-        {"id": "X-ray", "label": "X-ray"},
-        {"id": "Ward", "label": "Ward"},
-        {"id": "ICU", "label": "ICU"},
-        {"id": "Dialysis Unit", "label": "Dialysis"},
-        {"id": "Cath Lab", "label": "Cath Lab"},
-        {"id": "NICU", "label": "NICU"},
-        {"id": "PICU", "label": "PICU"},
-        {"id": "OT", "label": "OT"}
+        {"id": "Emergency Ward"},
+        {"id": "Medical Shop"},
+        {"id": "Laboratory"},
+        {"id": "X-ray"},
+        {"id": "Ward"},
+        {"id": "ICU"},
+        {"id": "Dialysis Unit"},
+        {"id": "Cath Lab"},
+        {"id": "NICU"},
+        {"id": "PICU"},
+        {"id": "OT"}
       ],
       "links": [
         {"source": "Emergency Ward", "target": "Medical Shop", "distance": 10},
@@ -73,7 +116,8 @@
         {"source": "Dialysis Unit", "target": "Cath Lab", "distance": 9},
         {"source": "Cath Lab", "target": "NICU", "distance": 8},
         {"source": "NICU", "target": "PICU", "distance": 3},
-        {"source": "PICU", "target": "OT", "distance": 4}
+        {"source": "PICU", "target": "OT", "distance": 4},
+        {"source": "OT", "target": "Emergency Ward", "distance": 10}
       ]
     };
 
@@ -116,43 +160,43 @@
         .enter().append("text")
         .attr("dy", ".35em")
         .attr("dx", "12px")
-        .text(function(d) { return d.label; }); // Display node labels
+        .text(function(d) { return d.id; });
 
     simulation.nodes(graph.nodes).on("tick", ticked);
     simulation.force("link").links(graph.links);
 
     function ticked() {
-      link.attr("x1", d => d.source.x)
-          .attr("y1", d => d.source.y)
-          .attr("x2", d => d.target.x)
-          .attr("y2", d => d.target.y);
+        link.attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
 
-      linkLabels.attr("x", d => (d.source.x + d.target.x) / 2)
-                .attr("y", d => (d.source.y + d.target.y) / 2);
+        linkLabels.attr("x", d => (d.source.x + d.target.x) / 2)
+                  .attr("y", d => (d.source.y + d.target.y) / 2);
 
-      node.attr("cx", d => d.x)
-          .attr("cy", d => d.y);
+        node.attr("cx", d => d.x)
+            .attr("cy", d => d.y);
 
-      labels.attr("x", d => d.x)
-            .attr("y", d => d.y);
+        labels.attr("x", d => d.x)
+              .attr("y", d => d.y);
     }
 
     function dragstarted(event, d) {
-      if (!event.active) simulation.alphaTarget(0.3).restart();
-      d.fx = d.x;
-      d.fy = d.y;
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
     }
 
     function dragged(event, d) {
-      d.fx = event.x;
-      d.fy = event.y;
+        d.fx = event.x;
+        d.fy = event.y;
     }
 
     function dragended(event, d) {
-      if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
     }
-  </script>
+    </script>
 </body>
 </html>
