@@ -92,105 +92,110 @@
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
-        var graph = {
-          "nodes": [
-            {"id": "Emergency Ward"},
-            {"id": "Medical Shop"},
-            {"id": "Laboratory"},
-            {"id": "X-ray"},
-            {"id": "Ward"},
-            {"id": "ICU"},
-            {"id": "Dialysis Unit"},
-            {"id": "Cath Lab"},
-            {"id": "NICU"},
-            {"id": "PICU"},
-            {"id": "OT"},
-            {"id": "Blood Bank"},
-            {"id": "Rehabilitation"},
-            {"id": "Physiotherapy"},
-            {"id": "Dental"},
-            {"id": "Eye"},
-            {"id": "Dermatology"},
-            {"id": "Psychiatry"}
-          ],
-          "links": [
-            {"source": "Emergency Ward", "target": "Medical Shop", "distance": 10},
-            {"source": "Emergency Ward", "target": "Laboratory", "distance": 8},
-            {"source": "Laboratory", "target": "X-ray", "distance": 5},
-            {"source": "X-ray", "target": "Ward", "distance": 7},
-            {"source": "Ward", "target": "ICU", "distance": 12},
-            {"source": "ICU", "target": "Dialysis Unit", "distance": 6},
-            {"source": "Dialysis Unit", "target": "Cath Lab", "distance": 9},
-            {"source": "NICU", "target": "PICU", "distance": 3},
-            {"source": "PICU", "target": "OT", "distance": 4}
-          ]
-        };
+    var graph = {
+      "nodes": [
+        {"id": "Emergency Ward"},
+        {"id": "Medical Shop"},
+        {"id": "Laboratory"},
+        {"id": "X-ray"},
+        {"id": "Ward"},
+        {"id": "ICU"},
+        {"id": "Dialysis Unit"},
+        {"id": "Cath Lab"},
+        {"id": "NICU"},
+        {"id": "PICU"},
+        {"id": "OT"}
+      ],
+      "links": [
+        {"source": "Emergency Ward", "target": "Medical Shop", "distance": 10},
+        {"source": "Emergency Ward", "target": "Laboratory", "distance": 8},
+        {"source": "Laboratory", "target": "X-ray", "distance": 5},
+        {"source": "X-ray", "target": "Ward", "distance": 7},
+        {"source": "Ward", "target": "ICU", "distance": 12},
+        {"source": "ICU", "target": "Dialysis Unit", "distance": 6},
+        {"source": "Dialysis Unit", "target": "Cath Lab", "distance": 9},
+        {"source": "NICU", "target": "PICU", "distance": 3},
+        {"source": "PICU", "target": "OT", "distance": 4}
+      ]
+    };
 
-        var svg = d3.select("svg"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
 
-        var simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance; }))
-            .force("charge", d3.forceManyBody().strength(-100))
-            .force("center", d3.forceCenter(width / 2, height / 2));
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 10; }))
+        .force("charge", d3.forceManyBody().strength(-300))
+        .force("center", d3.forceCenter(width / 2, height / 2));
 
-        var link = svg.append("g")
-            .selectAll("line")
-            .data(graph.links)
-            .enter().append("line")
-            .attr("class", "link");
+    var link = svg.append("g")
+        .selectAll("line")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link");
 
-        var node = svg.append("g")
-            .selectAll("circle")
-            .data(graph.nodes)
-            .enter().append("circle")
-            .attr("class", "node")
-            .attr("r", 8)
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
+    var linkLabels = svg.append("g")
+        .selectAll("text")
+        .data(graph.links)
+        .enter().append("text")
+        .attr("class", "distance-label")
+        .text(function(d) { return d.distance; });
 
-        var labels = svg.append("g")
-            .selectAll("text")
-            .data(graph.nodes)
-            .enter().append("text")
-            .attr("dy", ".35em")
-            .text(function(d) { return d.id; });
+    var node = svg.append("g")
+        .selectAll("circle")
+        .data(graph.nodes)
+        .enter().append("circle")
+        .attr("class", "node")
+        .attr("r", 10)
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended));
 
-        simulation.nodes(graph.nodes).on("tick", ticked);
-        simulation.force("link").links(graph.links);
+    var labels = svg.append("g")
+        .selectAll("text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .attr("dx", "12px")
+        .text(function(d) { return d.id; });
 
-        function ticked() {
-            link.attr("x1", d => d.source.x)
-                .attr("y1", d => d.source.y)
-                .attr("x2", d => d.target.x)
-                .attr("y2", d => d.target.y);
+    simulation.nodes(graph.nodes).on("tick", ticked);
+    simulation.force("link").links(graph.links);
 
-            node.attr("cx", d => d.x)
-                .attr("cy", d => d.y);
+    function ticked() {
+        link.attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
 
-            labels.attr("x", d => d.x)
-                .attr("y", d => d.y);
-        }
+        linkLabels.attr("x", d => (d.source.x + d.target.x) / 2)
+                  .attr("y", d => (d.source.y + d.target.y) / 2);
 
-        function dragstarted(event, d) {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-        }
+        node.attr("cx", d => d.x)
+            .attr("cy", d => d.y);
 
-        function dragged(event, d) {
-            d.fx = event.x;
-            d.fy = event.y;
-        }
+        labels.attr("x", d => d.x)
+              .attr("y", d => d.y);
+    }
 
-        function dragended(event, d) {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-        }
-    </script>
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
+</script>
+
 </body>
 </html>
