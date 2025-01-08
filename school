@@ -3,43 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Sub-Task</title>
+    <title>School Dijkstra Map</title>
     <style>
+        svg {
+            border: 1px solid #ccc;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
+
         th, td {
             border: 1px solid #000;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
 
         .node {
-          fill: #66b3ff;
-          stroke: #333;
-          stroke-width: 1.5px;
-          cursor: pointer;
+            fill: #66b3ff;
+            stroke: #333;
+            stroke-width: 1.5px;
+            cursor: pointer;
         }
 
         .link {
-          stroke: #999;
-          stroke-width: 1.5px;
-          stroke-dasharray: 4, 4;
+            stroke: #999;
+            stroke-width: 1.5px;
         }
 
         text {
-          font-family: sans-serif;
-          font-size: 12px;
-          text-anchor: middle;
-          fill: #333;
+            font-family: sans-serif;
+            font-size: 10px;
+            text-anchor: middle;
+            fill: #333;
         }
 
         .distance-label {
-          fill: #555;
+            fill: #555;
+            font-size: 10px;
         }
     </style>
 </head>
@@ -52,8 +58,10 @@
         <li><strong>Target:</strong> 11.3 (Enhance inclusive and sustainable urbanization)</li>
         <li><strong>Indicators:</strong> 11.2.1, 11.3.2</li>
     </ul>
+
     <h2>Description</h2>
     <p>The school should be built near residential areas to facilitate access for children. Contracts for infrastructure (classrooms, laboratories, library) should be arranged. Allocation of teachers, administrative staff, and support staff must be prioritized for smooth functioning.</p>
+
     <h2>School Sections</h2>
     <table>
         <thead>
@@ -78,7 +86,7 @@
     </table>
 
     <h2>School Dijkstra Map</h2>
-    <svg width="400" height="300"></svg>
+    <svg width="800" height="600"></svg>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
@@ -96,17 +104,17 @@
             {"id": "Medical Room"}
           ],
           "links": [
-            {"source": 0, "target": 1, "distance": 10}, 
-            {"source": 0, "target": 2, "distance": 8}, 
-            {"source": 1, "target": 2, "distance": 5}, 
-            {"source": 0, "target": 3, "distance": 7}, 
-            {"source": 3, "target": 4, "distance": 12}, 
-            {"source": 4, "target": 5, "distance": 6}, 
-            {"source": 5, "target": 6, "distance": 9}, 
-            {"source": 6, "target": 7, "distance": 4}, 
-            {"source": 7, "target": 8, "distance": 3}, 
-            {"source": 8, "target": 9, "distance": 2}, 
-            {"source": 9, "target": 0, "distance": 5} 
+            {"source": "Classrooms", "target": "Computer Lab", "distance": 10},
+            {"source": "Classrooms", "target": "Science Lab", "distance": 8},
+            {"source": "Computer Lab", "target": "Science Lab", "distance": 5},
+            {"source": "Classrooms", "target": "Library", "distance": 7},
+            {"source": "Library", "target": "Staff Room", "distance": 12},
+            {"source": "Staff Room", "target": "Playground", "distance": 6},
+            {"source": "Playground", "target": "Cafeteria", "distance": 9},
+            {"source": "Cafeteria", "target": "Administrative Office", "distance": 4},
+            {"source": "Administrative Office", "target": "Auditorium", "distance": 3},
+            {"source": "Auditorium", "target": "Medical Room", "distance": 2},
+            {"source": "Medical Room", "target": "Classrooms", "distance": 5}
           ]
         };
 
@@ -115,8 +123,8 @@
             height = +svg.attr("height");
 
         var simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance; }))
-            .force("charge", d3.forceManyBody().strength(-100))
+            .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 10; }))
+            .force("charge", d3.forceManyBody().strength(-400))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         var link = svg.append("g")
@@ -125,63 +133,66 @@
             .enter().append("line")
             .attr("class", "link");
 
+        var linkLabels = svg.append("g")
+            .selectAll("text")
+            .data(graph.links)
+            .enter().append("text")
+            .attr("class", "distance-label")
+            .text(function(d) { return d.distance; });
+
         var node = svg.append("g")
             .selectAll("circle")
             .data(graph.nodes)
             .enter().append("circle")
             .attr("class", "node")
-            .attr("r", 8)
+            .attr("r", 15)
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended));
 
-        var labels = node.append("text")
+        var labels = svg.append("g")
+            .selectAll("text")
+            .data(graph.nodes)
+            .enter().append("text")
             .text(function(d) { return d.id; })
             .attr("dy", ".35em");
 
-        var linkLabels = link.append("text")
-            .attr("class", "distance-label")
-            .attr("dy", ".35em")
-            .text(function(d) { return d.distance; });
+        simulation.nodes(graph.nodes).on("tick", ticked);
+        simulation.force("link").links(graph.links);
+
+        function ticked() {
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            linkLabels.attr("x", function(d) { return (d.source.x + d.target.x) / 2; })
+                      .attr("y", function(d) { return (d.source.y + d.target.y) / 2; });
+
+            node.attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; });
+
+            labels.attr("x", function(d) { return d.x; })
+                  .attr("y", function(d) { return d.y; });
+        }
 
         function dragstarted(event, d) {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
-          d.fx = d.x;
-          d.fy = d.y;
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
         }
 
         function dragged(event, d) {
-          d.fx = event.x;
-          d.fy = event.y;
+            d.fx = event.x;
+            d.fy = event.y;
         }
 
         function dragended(event, d) {
-          if (!event.active) simulation.alphaTarget(0);
-          d.fx = null;
-          d.fy = null;
-        }
-
-        simulation
-            .nodes(graph.nodes)
-            .on("tick", ticked);
-
-        function ticked() {
-          link
-              .attr("x1", function(d) { return d.source.x; })
-              .attr("y1", function(d) { return d.source.y; })
-              .attr("x2", function(d) { return d.target.x; })
-              .attr("y2", function(d) { return d.target.y; });
-
-          node
-              .attr("cx", function(d) { return d.x; })
-              .attr("cy", function(d) { return d.y; });
-
-          linkLabels
-              .attr("x", function(d) { return (d.source.x + d.target.x) / 2; })
-              .attr("y", function(d) { return (d.source.y + d.target.y) / 2; });
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
         }
     </script>
-
 </body>
 </html>
