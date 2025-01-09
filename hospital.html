@@ -125,11 +125,11 @@
         height = +svg.attr("height");
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 15; })) // Increased distance
-        .force("charge", d3.forceManyBody().strength(-300))
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 30; })) // Increased distance multiplier
+        .force("charge", d3.forceManyBody().strength(-500)) // Increased negative strength to repel nodes further apart
         .force("center", d3.forceCenter(width / 2 + 100, height / 2)) // Shift graph to the right
-        .force("x", d3.forceX().strength(0.05).x(width / 2 + 100)) // Shift nodes horizontally
-        .force("y", d3.forceY().strength(0.15).y(height / 2)); // Keep vertical spread
+        .force("x", d3.forceX().strength(0.05).x(width / 2 + 100)) // Spread horizontally
+        .force("y", d3.forceY().strength(0.1).y(height / 2)); // Spread vertically more
 
     var link = svg.append("g")
         .selectAll("line")
