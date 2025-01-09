@@ -87,7 +87,7 @@
     </table>
 
     <h2>Hospital Dijkstra Map</h2>
-    <svg width="400" height="300"></svg>
+    <svg width="1200" height="800"></svg>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
@@ -125,11 +125,11 @@
         height = +svg.attr("height");
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(500)) 
-        .force("charge", d3.forceManyBody().strength(-400)) 
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX(width * 2).strength(0.1))
-        .force("y", d3.forceY(height * 2).strength(0.1));
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 50; })) // Further increase distance multiplier
+        .force("charge", d3.forceManyBody().strength(-1000)) // Strong repulsion
+        .force("center", d3.forceCenter(width / 2, height / 2)) // Center the graph
+        .force("x", d3.forceX().strength(0.1).x(width / 2)) // Ensure more even spread horizontally
+        .force("y", d3.forceY().strength(0.1).y(height / 2)); // Spread vertically
 
     var link = svg.append("g")
         .selectAll("line")
@@ -176,11 +176,6 @@
 
         labels.attr("x", d => d.x)
               .attr("y", d => d.y);
-
-        graph.nodes.forEach(function(d) {
-            d.fx = d.x;
-            d.fy = d.y;
-        });
     }
     </script>
 </body>
