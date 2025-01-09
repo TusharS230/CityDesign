@@ -17,29 +17,25 @@
         th {
             background-color: #f2f2f2;
         }
-
         .node {
-          fill: #66b3ff;
-          stroke: #333;
-          stroke-width: 1.5px;
-          cursor: pointer;
+            fill: #66b3ff;
+            stroke: #333;
+            stroke-width: 1.5px;
+            cursor: pointer;
         }
-
         .link {
-          stroke: #999;
-          stroke-width: 1.5px;
-          stroke-dasharray: 4, 4;
+            stroke: #999;
+            stroke-width: 1.5px;
+            stroke-dasharray: 4, 4;
         }
-
         text {
-          font-family: sans-serif;
-          font-size: 12px;
-          text-anchor: middle;
-          fill: #333;
+            font-family: sans-serif;
+            font-size: 12px;
+            text-anchor: middle;
+            fill: #333;
         }
-
         .distance-label {
-          fill: #555;
+            fill: #555;
         }
     </style>
 </head>
@@ -74,115 +70,118 @@
             <tr><td>8</td><td>Maintenance Depots</td><td>2</td></tr>
         </tbody>
     </table>
-
     <h2>Transport System Dijkstra Map</h2>
     <svg width="500" height="400"></svg>
-
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
         var graph = {
-          "nodes": [
-            {"id": "Bus Station 1"},
-            {"id": "Bus Station 2"},
-            {"id": "Metro Station 1"},
-            {"id": "Metro Station 2"},
-            {"id": "Bus Station 3"},
-            {"id": "Bus Station 4"},
-            {"id": "Bus Station 5"},
-            {"id": "Ticket Counter 1"},
-            {"id": "Ticket Counter 2"},
-            {"id": "Parking Area 1"},
-            {"id": "Parking Area 2"},
-            {"id": "Emergency Response"},
-            {"id": "Maintenance Depot 1"}
-          ],
-          "links": [
-            {"source": 0, "target": 1, "distance": 5},
-            {"source": 0, "target": 2, "distance": 8},
-            {"source": 1, "target": 3, "distance": 6},
-            {"source": 2, "target": 3, "distance": 4},
-            {"source": 1, "target": 4, "distance": 3},
-            {"source": 4, "target": 5, "distance": 2},
-            {"source": 5, "target": 6, "distance": 4},
-            {"source": 0, "target": 7, "distance": 2},
-            {"source": 1, "target": 8, "distance": 3},
-            {"source": 2, "target": 9, "distance": 5},
-            {"source": 3, "target": 10, "distance": 4},
-            {"source": 4, "target": 11, "distance": 1},
-            {"source": 5, "target": 12, "distance": 2}
-          ]
+            nodes: [
+                { id: "Bus Station 1", x: 50, y: 50 },
+                { id: "Bus Station 2", x: 150, y: 50 },
+                { id: "Metro Station 1", x: 250, y: 100 },
+                { id: "Metro Station 2", x: 350, y: 100 },
+                { id: "Bus Station 3", x: 50, y: 150 },
+                { id: "Bus Station 4", x: 150, y: 150 },
+                { id: "Bus Station 5", x: 250, y: 200 },
+                { id: "Ticket Counter 1", x: 350, y: 150 },
+                { id: "Ticket Counter 2", x: 450, y: 150 },
+                { id: "Parking Area 1", x: 150, y: 250 },
+                { id: "Parking Area 2", x: 250, y: 250 },
+                { id: "Emergency Response", x: 350, y: 250 },
+                { id: "Maintenance Depot 1", x: 450, y: 250 },
+            ],
+            links: [
+                { source: 0, target: 1, distance: 5 },
+                { source: 0, target: 2, distance: 8 },
+                { source: 1, target: 3, distance: 6 },
+                { source: 2, target: 3, distance: 4 },
+                { source: 1, target: 4, distance: 3 },
+                { source: 4, target: 5, distance: 2 },
+                { source: 5, target: 6, distance: 4 },
+                { source: 0, target: 7, distance: 2 },
+                { source: 1, target: 8, distance: 3 },
+                { source: 2, target: 9, distance: 5 },
+                { source: 3, target: 10, distance: 4 },
+                { source: 4, target: 11, distance: 1 },
+                { source: 5, target: 12, distance: 2 },
+            ]
         };
 
         var svg = d3.select("svg"),
             width = +svg.attr("width"),
-            height = +svg.attr("height"));
+            height = +svg.attr("height");
 
-        var simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance; }))
-            .force("charge", d3.forceManyBody().strength(-100))
-            .force("center", d3.forceCenter(width / 2, height / 2));
-
-        var link = svg.append("g")
-            .selectAll("line")
+        var link = svg
+            .selectAll(".link")
             .data(graph.links)
-            .enter().append("line")
-            .attr("class", "link");
+            .enter()
+            .append("line")
+            .attr("class", "link")
+            .attr("x1", (d) => graph.nodes[d.source].x)
+            .attr("y1", (d) => graph.nodes[d.source].y)
+            .attr("x2", (d) => graph.nodes[d.target].x)
+            .attr("y2", (d) => graph.nodes[d.target].y)
+            .style("stroke", "#999")
+            .style("stroke-width", 1.5)
+            .style("stroke-dasharray", "4, 4");
 
-        var node = svg.append("g")
-            .selectAll("circle")
+        var node = svg
+            .selectAll(".node")
             .data(graph.nodes)
-            .enter().append("circle")
+            .enter()
+            .append("circle")
             .attr("class", "node")
             .attr("r", 8)
-            .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
+            .attr("cx", (d) => d.x)
+            .attr("cy", (d) => d.y)
+            .style("fill", "#66b3ff")
+            .style("stroke", "#333")
+            .style("stroke-width", 1.5)
+            .call(
+                d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended)
+            );
 
-        var labels = node.append("text")
-            .text(function(d) { return d.id; })
-            .attr("dy", ".35em");
+        svg
+            .selectAll(".label")
+            .data(graph.nodes)
+            .enter()
+            .append("text")
+            .attr("x", (d) => d.x)
+            .attr("y", (d) => d.y - 12)
+            .attr("class", "label")
+            .text((d) => d.id)
+            .style("font-size", "12px")
+            .style("text-anchor", "middle")
+            .style("fill", "#333");
 
-        var linkLabels = link.append("text")
+        svg
+            .selectAll(".distance-label")
+            .data(graph.links)
+            .enter()
+            .append("text")
+            .attr("x", (d) => (graph.nodes[d.source].x + graph.nodes[d.target].x) / 2)
+            .attr("y", (d) => (graph.nodes[d.source].y + graph.nodes[d.target].y) / 2)
             .attr("class", "distance-label")
-            .attr("dy", ".35em")
-            .text(function(d) { return d.distance; });
+            .text((d) => d.distance)
+            .style("font-size", "10px")
+            .style("fill", "#555");
 
         function dragstarted(event, d) {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
-          d.fx = d.x;
-          d.fy = d.y;
+            d.fx = d.x;
+            d.fy = d.y;
         }
 
         function dragged(event, d) {
-          d.fx = event.x;
-          d.fy = event.y;
+            d.fx = event.x;
+            d.fy = event.y;
         }
 
         function dragended(event, d) {
-          if (!event.active) simulation.alphaTarget(0);
-          d.fx = null;
-          d.fy = null;
-        }
-
-        simulation
-            .nodes(graph.nodes)
-            .on("tick", ticked);
-
-        function ticked() {
-          link
-              .attr("x1", function(d) { return d.source.x; })
-              .attr("y1", function(d) { return d.source.y; })
-              .attr("x2", function(d) { return d.target.x; })
-              .attr("y2", function(d) { return d.target.y; });
-
-          node
-              .attr("cx", function(d) { return d.x; })
-              .attr("cy", function(d) { return d.y; });
-
-          linkLabels
-              .attr("x", function(d) { return (d.source.x + d.target.x) / 2; })
-              .attr("y", function(d) { return (d.source.y + d.target.y) / 2; });
+            d.fx = null;
+            d.fy = null;
         }
     </script>
 </body>
