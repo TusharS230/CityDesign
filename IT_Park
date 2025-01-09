@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Park Sub-Task</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .node {
+          fill: #66b3ff;
+          stroke: #333;
+          stroke-width: 1.5px;
+          cursor: pointer;
+        }
+
+        .link {
+          stroke: #999;
+          stroke-width: 1.5px;
+          stroke-dasharray: 4, 4;
+        }
+
+        text {
+          font-family: sans-serif;
+          font-size: 12px;
+          text-anchor: middle;
+          fill: #333;
+        }
+
+        .distance-label {
+          fill: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sub-Task: IT Park</h1>
+    <h2>SDG Goals, Targets, and Indicators</h2>
+    <ul>
+        <li><strong>SDG Goal:</strong> 11 (Sustainable Cities and Communities)</li>
+        <li><strong>Target:</strong> 11.3 (Enhance inclusive and sustainable urbanization)</li>
+        <li><strong>Target:</strong> 11.a (Strengthen regional development planning)</li>
+        <li><strong>Indicators:</strong> 11.3.1, 11.a.1</li>
+    </ul>
+    <h2>Description</h2>
+    <p>The IT park should serve as a hub for startups and established companies with adequate facilities. Contracts for networking, power backup, and shared spaces should be secured. Allocation of administrative and security staff is essential for 24x7 operations.</p>
+    <h2>IT Park Sections</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Sl. No.</th>
+                <th>Section</th>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Office Spaces</td><td>50</td></tr>
+            <tr><td>2</td><td>Meeting Rooms</td><td>10</td></tr>
+            <tr><td>3</td><td>Cafeterias</td><td>5</td></tr>
+            <tr><td>4</td><td>Data Centers</td><td>2</td></tr>
+            <tr><td>5</td><td>Parking Areas</td><td>3</td></tr>
+            <tr><td>6</td><td>Security Control Rooms</td><td>2</td></tr>
+            <tr><td>7</td><td>Training Centers</td><td>5</td></tr>
+            <tr><td>8</td><td>Innovation Labs</td><td>3</td></tr>
+        </tbody>
+    </table>
+
+    <h2>IT Park Dijkstra Map</h2>
+    <svg width="500" height="400"></svg>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        var graph = {
+          "nodes": [
+            {"id": "Office Building 1"},
+            {"id": "Office Building 2"},
+            {"id": "Meeting Room 1"},
+            {"id": "Meeting Room 2"},
+            {"id": "Data Center"},
+            {"id": "Cafeteria"},
+            {"id": "Training Center"},
+            {"id": "Innovation Lab 1"},
+            {"id": "Innovation Lab 2"},
+            {"id": "Security Control Room 1"},
+            {"id": "Security Control Room 2"},
+            {"id": "Parking Area 1"},
+            {"id": "Parking Area 2"},
+            {"id": "Parking Area 3"}
+          ],
+          "links": [
+            {"source": 0, "target": 1, "distance": 20},
+            {"source": 0, "target": 2, "distance": 15},
+            {"source": 1, "target": 3, "distance": 10},
+            {"source": 2, "target": 3, "distance": 8},
+            {"source": 0, "target": 4, "distance": 30},
+            {"source": 4, "target": 5, "distance": 12},
+            {"source": 5, "target": 6, "distance": 18},
+            {"source": 6, "target": 7, "distance": 5},
+            {"source": 6, "target": 8, "distance": 7},
+            {"source": 0, "target": 9, "distance": 15},
+            {"source": 1, "target": 10, "distance": 18},
+            {"source": 2, "target": 11, "distance": 12},
+            {"source": 3, "target": 12, "distance": 10},
+            {"source": 4, "target": 13, "distance": 25},
+            {"source": 5, "target": 13, "distance": 15},
+            {"source": 6, "target": 13, "distance": 20} 
+          ]
+        };
+
+        var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height"));
+
+        var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance; }))
+            .force("charge", d3.forceManyBody().strength(-100))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        var link = svg.append("g")
+            .selectAll("line")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("class", "link");
+
+        var node = svg.append("g")
+            .selectAll("circle")
+            .data(graph.nodes)
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", 8)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        var labels = node.append("text")
+            .text(function(d) { return d.id; })
+            .attr("dy", ".35em");
+
+        var linkLabels = link.append("text")
+            .attr("class", "distance-label")
+            .attr("dy", ".35em")
+            .text(function(d) { return d.distance; });
+
+        function dragstarted(event, d) {
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+          d.fx = event.x;
+          d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+          if (!event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        }
+
+        simulation
+            .nodes(graph.nodes)
+            .on("tick", ticked);
+
+        function ticked() {
+          link
+              .attr("x1", function(d) { return d.source.x; })
+              .attr("y1", function(d) { return d.source.y; })
+              .attr("x2", function(d) { return d.target.x; })
+              .attr("y2", function(d) { return d.target.y; });
+
+          node
+              .attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; });
+
+          linkLabels
+              .attr("x", function(d) { return (d.source.x + d.target.x) / 2; })
+              .attr("y", function(d) { return (d.source.y + d.target.y) / 2; });
+        }
+    </script>
+</body>
+</html>
