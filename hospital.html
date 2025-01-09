@@ -22,7 +22,6 @@
           fill: #66b3ff;
           stroke: #333;
           stroke-width: 1.5px;
-          cursor: pointer;
         }
 
         .link {
@@ -128,7 +127,9 @@
     var simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 10; }))
         .force("charge", d3.forceManyBody().strength(-300))
-        .force("center", d3.forceCenter(width / 2, height / 2));
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("x", d3.forceX().strength(0.05).x(width / 2))
+        .force("y", d3.forceY().strength(0.15).y(height / 2));
 
     var link = svg.append("g")
         .selectAll("line")
