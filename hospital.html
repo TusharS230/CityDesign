@@ -22,7 +22,6 @@
           fill: #66b3ff;
           stroke: #333;
           stroke-width: 1.5px;
-          cursor: pointer;
         }
 
         .link {
@@ -150,11 +149,7 @@
         .data(graph.nodes)
         .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 20)
-        .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended));
+        .attr("r", 20);
 
     var labels = svg.append("g")
         .selectAll("text")
@@ -181,23 +176,11 @@
 
         labels.attr("x", d => d.x)
               .attr("y", d => d.y);
-    }
-
-    function dragstarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-    }
-
-    function dragged(event, d) {
-        d.fx = event.x;
-        d.fy = event.y;
-    }
-
-    function dragended(event, d) {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
+        
+        graph.nodes.forEach(function(d) {
+            d.fx = d.x;
+            d.fy = d.y;
+        });
     }
     </script>
 </body>
