@@ -7,8 +7,6 @@
     <style>
         svg {
             border: 1px solid #ccc;
-            width: 100%;
-            height: auto;
         }
 
         table {
@@ -33,18 +31,14 @@
             cursor: pointer;
         }
 
-        .node:hover {
-            fill: #ffcc00;
-        }
-
         .link {
             stroke: #999;
-            stroke-width: 2px;
+            stroke-width: 1.5px;
         }
 
         text {
             font-family: sans-serif;
-            font-size: 12px;
+            font-size: 10px;
             text-anchor: middle;
             fill: #333;
         }
@@ -52,35 +46,6 @@
         .distance-label {
             fill: #555;
             font-size: 10px;
-        }
-
-        .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            transition: background-color 0.2s ease;
-        }
-
-        .accordion:hover {
-            background-color: #ccc;
-        }
-
-        .panel {
-            display: none;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-top: 1px solid #ccc;
-        }
-
-        .panel ul {
-            list-style-type: disc;
-            margin: 10px;
-            padding-left: 20px;
         }
     </style>
 </head>
@@ -121,83 +86,64 @@
     </table>
 
     <h2>School Dijkstra Map</h2>
-    <svg viewBox="0 0 800 600"></svg>
-
-    <button class="accordion">Case 2: School</button>
-    <div class="panel">
-        <ul>
-            <li>Inclusive Access: Ensuring that all students, including those with disabilities, have access to convenient public transport to and from schools.</li>
-            <li>Green School Spaces: Designing school campuses with open spaces and recreational areas accessible to all students.</li>
-            <li>Safe School Infrastructure: Ensuring school buildings and facilities are resilient to disasters and provide a safe learning environment.</li>
-            <li>Education for Sustainable Development: Teaching students about sustainability and the importance of public space in cities.</li>
-        </ul>
-        <a href="school">Mapping Details</a>
-    </div>
+    <svg width="800" height="600"></svg>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
-        const acc = document.querySelectorAll(".accordion");
-        acc.forEach((button) => {
-            button.addEventListener("click", function () {
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        });
-
-        const graph = {
-            nodes: [
-                { id: "Classrooms" },
-                { id: "Computer Lab" },
-                { id: "Science Lab" },
-                { id: "Library" },
-                { id: "Staff Room" },
-                { id: "Playground" },
-                { id: "Cafeteria" },
-                { id: "Administrative Office" },
-                { id: "Auditorium" },
-                { id: "Medical Room" }
-            ],
-            links: [
-                { source: "Classrooms", target: "Computer Lab", distance: 10 },
-                { source: "Classrooms", target: "Science Lab", distance: 8 },
-                { source: "Computer Lab", target: "Science Lab", distance: 5 },
-                { source: "Classrooms", target: "Library", distance: 7 },
-                { source: "Library", target: "Staff Room", distance: 12 },
-                { source: "Staff Room", target: "Playground", distance: 6 },
-                { source: "Playground", target: "Cafeteria", distance: 9 },
-                { source: "Cafeteria", target: "Administrative Office", distance: 4 },
-                { source: "Administrative Office", target: "Auditorium", distance: 3 },
-                { source: "Auditorium", target: "Medical Room", distance: 2 },
-                { source: "Medical Room", target: "Classrooms", distance: 5 }
-            ]
+        var graph = {
+          "nodes": [
+            {"id": "Classrooms"},
+            {"id": "Computer Lab"},
+            {"id": "Science Lab"},
+            {"id": "Library"},
+            {"id": "Staff Room"},
+            {"id": "Playground"},
+            {"id": "Cafeteria"},
+            {"id": "Administrative Office"},
+            {"id": "Auditorium"},
+            {"id": "Medical Room"}
+          ],
+          "links": [
+            {"source": "Classrooms", "target": "Computer Lab", "distance": 10},
+            {"source": "Classrooms", "target": "Science Lab", "distance": 8},
+            {"source": "Computer Lab", "target": "Science Lab", "distance": 5},
+            {"source": "Classrooms", "target": "Library", "distance": 7},
+            {"source": "Library", "target": "Staff Room", "distance": 12},
+            {"source": "Staff Room", "target": "Playground", "distance": 6},
+            {"source": "Playground", "target": "Cafeteria", "distance": 9},
+            {"source": "Cafeteria", "target": "Administrative Office", "distance": 4},
+            {"source": "Administrative Office", "target": "Auditorium", "distance": 3},
+            {"source": "Auditorium", "target": "Medical Room", "distance": 2},
+            {"source": "Medical Room", "target": "Classrooms", "distance": 5}
+          ]
         };
 
-        const svg = d3.select("svg"),
-              width = 800,
-              height = 600;
+        var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height"));
 
-        const simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id((d) => d.id).distance((d) => d.distance * 10))
+        var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 10; }))
             .force("charge", d3.forceManyBody().strength(-400))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
-        const link = svg.append("g")
+        var link = svg.append("g")
             .selectAll("line")
             .data(graph.links)
-            .enter()
-            .append("line")
+            .enter().append("line")
             .attr("class", "link");
 
-        const node = svg.append("g")
+        var linkLabels = svg.append("g")
+            .selectAll("text")
+            .data(graph.links)
+            .enter().append("text")
+            .attr("class", "distance-label")
+            .text(function(d) { return d.distance; });
+
+        var node = svg.append("g")
             .selectAll("circle")
             .data(graph.nodes)
-            .enter()
-            .append("circle")
+            .enter().append("circle")
             .attr("class", "node")
             .attr("r", 15)
             .call(d3.drag()
@@ -205,27 +151,30 @@
                 .on("drag", dragged)
                 .on("end", dragended));
 
-        const labels = svg.append("g")
+        var labels = svg.append("g")
             .selectAll("text")
             .data(graph.nodes)
-            .enter()
-            .append("text")
-            .text((d) => d.id)
+            .enter().append("text")
+            .text(function(d) { return d.id; })
             .attr("dy", ".35em");
 
         simulation.nodes(graph.nodes).on("tick", ticked);
         simulation.force("link").links(graph.links);
 
         function ticked() {
-            link
-                .attr("x1", (d) => d.source.x)
-                .attr("y1", (d) => d.source.y)
-                .attr("x2", (d) => d.target.x)
-                .attr("y2", (d) => d.target.y);
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
 
-            node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+            linkLabels.attr("x", function(d) { return (d.source.x + d.target.x) / 2; })
+                      .attr("y", function(d) { return (d.source.y + d.target.y) / 2; });
 
-            labels.attr("x", (d) => d.x).attr("y", (d) => d.y);
+            node.attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; });
+
+            labels.attr("x", function(d) { return d.x; })
+                  .attr("y", function(d) { return d.y; });
         }
 
         function dragstarted(event, d) {
