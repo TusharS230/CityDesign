@@ -87,7 +87,7 @@
     </table>
 
     <h2>Hospital Dijkstra Map</h2>
-    <svg width="1200" height="600"></svg>
+    <svg width="800" height="600"></svg>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
@@ -125,11 +125,9 @@
         height = +svg.attr("height");
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 50; }))
-        .force("charge", d3.forceManyBody().strength(-1000)) 
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX().strength(0.08).x(width / 2))
-        .force("y", d3.forceY().strength(0.04).y(height / 2)); 
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 10; }))
+        .force("charge", d3.forceManyBody().strength(-300))
+        .force("center", d3.forceCenter(width / 2, height / 2));
 
     var link = svg.append("g")
         .selectAll("line")
@@ -149,7 +147,11 @@
         .data(graph.nodes)
         .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 20);
+        .attr("r", 20)
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended));
 
     var labels = svg.append("g")
         .selectAll("text")
@@ -176,6 +178,23 @@
 
         labels.attr("x", d => d.x)
               .attr("y", d => d.y);
+    }
+
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
     }
     </script>
 </body>
