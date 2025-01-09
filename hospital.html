@@ -125,11 +125,11 @@
         height = +svg.attr("height");
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 60; })) // Increased distance multiplier
-        .force("charge", d3.forceManyBody().strength(-2500)) // Stronger repulsion to push nodes apart
-        .force("center", d3.forceCenter(width / 2, height / 2)) // Ensures that the center is in the middle
-        .force("x", d3.forceX().strength(0.2).x(width / 2)) // More horizontal spread
-        .force("y", d3.forceY().strength(0.1).y(height / 2)); // Reduced vertical spread for an oval shape
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(function(d) { return d.distance * 70; })) // Adjusted link distance for clarity
+        .force("charge", d3.forceManyBody().strength(-2000)) // Reduced repulsion for less scattering
+        .force("center", d3.forceCenter(width / 2, height / 2)) // Centered layout
+        .force("x", d3.forceX().strength(0.1).x(width / 2)) // Spread nodes horizontally with slight strength
+        .force("y", d3.forceY().strength(0.05).y(height / 2)); // Less vertical spread for oval shape
 
     var link = svg.append("g")
         .selectAll("line")
