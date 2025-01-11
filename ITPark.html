@@ -3,166 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Park Sub-Task</title>
+    <title>IT Park Dijkstra Map</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-
         .node {
             fill: #66b3ff;
             stroke: #333;
             stroke-width: 1.5px;
         }
-
         .link {
             stroke: #999;
             stroke-width: 1.5px;
             stroke-dasharray: 4, 4;
         }
-
         text {
             font-family: sans-serif;
             font-size: 12px;
             text-anchor: middle;
             fill: #333;
         }
-
-        .distance-label {
-            fill: #555;
-        }
     </style>
 </head>
 <body>
-    <h1>Sub-Task: IT Park</h1>
-    <h2>SDG Goals, Targets, and Indicators</h2>
-    <ul>
-        <li><strong>SDG Goal:</strong> 11 (Sustainable Cities and Communities)</li>
-        <li><strong>Target:</strong> 11.3 (Enhance inclusive and sustainable urbanization)</li>
-        <li><strong>Target:</strong> 11.a (Strengthen regional development planning)</li>
-        <li><strong>Indicators:</strong> 11.3.1, 11.a.1</li>
-    </ul>
-    <h2>Description</h2>
-    <p>The IT park should serve as a hub for startups and established companies with adequate facilities. Contracts for networking, power backup, and shared spaces should be secured. Allocation of administrative and security staff is essential for 24x7 operations.</p>
-    <h2>IT Park Sections</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Sl. No.</th>
-                <th>Section</th>
-                <th>Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>1</td><td>Office Spaces</td><td>50</td></tr>
-            <tr><td>2</td><td>Meeting Rooms</td><td>10</td></tr>
-            <tr><td>3</td><td>Cafeterias</td><td>5</td></tr>
-            <tr><td>4</td><td>Data Centers</td><td>2</td></tr>
-            <tr><td>5</td><td>Parking Areas</td><td>3</td></tr>
-            <tr><td>6</td><td>Security Control Rooms</td><td>2</td></tr>
-            <tr><td>7</td><td>Training Centers</td><td>5</td></tr>
-            <tr><td>8</td><td>Innovation Labs</td><td>3</td></tr>
-        </tbody>
-    </table>
-
-    <h2>IT Park Dijkstra Map</h2>
+    <h1>IT Park Dijkstra Map</h1>
     <svg width="800" height="600"></svg>
-
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
-        var graph = {
-            "nodes": [
-                {"id": "Office Building 1"},
-                {"id": "Office Building 2"},
-                {"id": "Meeting Room 1"},
-                {"id": "Meeting Room 2"},
-                {"id": "Data Center"},
-                {"id": "Cafeteria"},
-                {"id": "Training Center"},
-                {"id": "Innovation Lab 1"},
-                {"id": "Innovation Lab 2"},
-                {"id": "Security Control Room 1"},
-                {"id": "Security Control Room 2"},
-                {"id": "Parking Area 1"},
-                {"id": "Parking Area 2"},
-                {"id": "Parking Area 3"}
+        const graph = {
+            nodes: [
+                { id: "Office Building 1" },
+                { id: "Office Building 2" },
+                { id: "Meeting Room 1" },
+                { id: "Meeting Room 2" },
+                { id: "Data Center" },
+                { id: "Cafeteria" },
+                { id: "Training Center" },
+                { id: "Innovation Lab 1" },
+                { id: "Innovation Lab 2" },
+                { id: "Security Control Room 1" },
+                { id: "Security Control Room 2" },
+                { id: "Parking Area 1" },
+                { id: "Parking Area 2" },
+                { id: "Parking Area 3" }
             ],
-            "links": [
-                {"source": 0, "target": 1, "distance": 20},
-                {"source": 0, "target": 2, "distance": 15},
-                {"source": 1, "target": 3, "distance": 10},
-                {"source": 2, "target": 3, "distance": 8},
-                {"source": 0, "target": 4, "distance": 30},
-                {"source": 4, "target": 5, "distance": 12},
-                {"source": 5, "target": 6, "distance": 18},
-                {"source": 6, "target": 7, "distance": 5},
-                {"source": 6, "target": 8, "distance": 7},
-                {"source": 0, "target": 9, "distance": 15},
-                {"source": 1, "target": 10, "distance": 18},
-                {"source": 2, "target": 11, "distance": 12},
-                {"source": 3, "target": 12, "distance": 10},
-                {"source": 4, "target": 13, "distance": 25},
-                {"source": 5, "target": 13, "distance": 15},
-                {"source": 6, "target": 13, "distance": 20}
+            links: [
+                { source: "Office Building 1", target: "Office Building 2", distance: 20 },
+                { source: "Office Building 1", target: "Meeting Room 1", distance: 15 },
+                { source: "Office Building 2", target: "Meeting Room 2", distance: 10 },
+                { source: "Meeting Room 1", target: "Meeting Room 2", distance: 8 },
+                { source: "Office Building 1", target: "Data Center", distance: 30 },
+                { source: "Data Center", target: "Cafeteria", distance: 12 },
+                { source: "Cafeteria", target: "Training Center", distance: 18 },
+                { source: "Training Center", target: "Innovation Lab 1", distance: 5 },
+                { source: "Training Center", target: "Innovation Lab 2", distance: 7 },
+                { source: "Office Building 1", target: "Security Control Room 1", distance: 15 },
+                { source: "Office Building 2", target: "Security Control Room 2", distance: 18 },
+                { source: "Meeting Room 1", target: "Parking Area 1", distance: 12 },
+                { source: "Meeting Room 2", target: "Parking Area 2", distance: 10 },
+                { source: "Data Center", target: "Parking Area 3", distance: 25 },
+                { source: "Cafeteria", target: "Parking Area 3", distance: 15 },
+                { source: "Training Center", target: "Parking Area 3", distance: 20 }
             ]
         };
-
-        var svg = d3.select("svg"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
-
-        var simulation = d3.forceSimulation(graph.nodes)
+        const svg = d3.select("svg");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const simulation = d3.forceSimulation(graph.nodes)
             .force("link", d3.forceLink(graph.links).id(d => d.id).distance(d => d.distance))
             .force("charge", d3.forceManyBody().strength(-300))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide(30));
-
-        var link = svg.append("g")
-            .attr("class", "links")
+            .force("collision", d3.forceCollide(50));
+        const link = svg.append("g")
             .selectAll("line")
             .data(graph.links)
             .enter().append("line")
             .attr("class", "link");
-
-        var node = svg.append("g")
-            .attr("class", "nodes")
+        const node = svg.append("g")
             .selectAll("circle")
             .data(graph.nodes)
             .enter().append("circle")
             .attr("class", "node")
-            .attr("r", 10);
-
-        var labels = svg.append("g")
+            .attr("r", 10)
+            .call(d3.drag()
+                .on("start", dragStarted)
+                .on("drag", dragged)
+                .on("end", dragEnded));
+        const labels = svg.append("g")
             .selectAll("text")
             .data(graph.nodes)
             .enter().append("text")
             .attr("dy", -15)
             .text(d => d.id);
-
-        simulation.on("tick", function() {
+        simulation.on("tick", () => {
             link
                 .attr("x1", d => d.source.x)
                 .attr("y1", d => d.source.y)
                 .attr("x2", d => d.target.x)
                 .attr("y2", d => d.target.y);
-
             node
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y);
-
             labels
                 .attr("x", d => d.x)
                 .attr("y", d => d.y);
         });
+        function dragStarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        function dragEnded(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
     </script>
 </body>
 </html>
