@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Park Dijkstra Map</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .map-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
         .node {
             fill: #66b3ff;
             stroke: #333;
@@ -24,8 +50,40 @@
     </style>
 </head>
 <body>
-    <h1>IT Park Dijkstra Map</h1>
-    <svg width="800" height="600"></svg>
+    <h1>Sub-Task: IT Park</h1>
+    <h2>SDG Goals, Targets, and Indicators</h2>
+    <ul>
+        <li><strong>SDG Goal:</strong> 11 (Sustainable Cities and Communities)</li>
+        <li><strong>Target:</strong> 11.3 (Enhance inclusive and sustainable urbanization)</li>
+        <li><strong>Target:</strong> 11.a (Strengthen regional development planning)</li>
+        <li><strong>Indicators:</strong> 11.3.1, 11.a.1</li>
+    </ul>
+    <h2>Description</h2>
+    <p>The IT park should serve as a hub for startups and established companies with adequate facilities. Contracts for networking, power backup, and shared spaces should be secured. Allocation of administrative and security staff is essential for 24x7 operations.</p>
+    <h2>IT Park Sections</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Sl. No.</th>
+                <th>Section</th>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Office Spaces</td><td>50</td></tr>
+            <tr><td>2</td><td>Meeting Rooms</td><td>10</td></tr>
+            <tr><td>3</td><td>Cafeterias</td><td>5</td></tr>
+            <tr><td>4</td><td>Data Centers</td><td>2</td></tr>
+            <tr><td>5</td><td>Parking Areas</td><td>3</td></tr>
+            <tr><td>6</td><td>Security Control Rooms</td><td>2</td></tr>
+            <tr><td>7</td><td>Training Centers</td><td>5</td></tr>
+            <tr><td>8</td><td>Innovation Labs</td><td>3</td></tr>
+        </tbody>
+    </table>
+    <h2>IT Park Dijkstra Map</h2>
+    <div class="map-container">
+        <svg width="800" height="600"></svg>
+    </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
         const graph = {
